@@ -1,0 +1,41 @@
+\section{Introduction}
+In the field of \textit{Computer Vision} (CV), \textit{Convolutional Neural Networks} (CNNs) have played an important role since the introduction of AlexNet, roughly a decade ago [BRON]. Recently, however, a new type of neural network architecture, called \textit{Vision Transformer} (ViT), has gained state of the art performance on common learning benchmarks, including the famous ImageNet dataset [BRON/VOETNOOT].
+
+Exciting as this may be, a plain ViT is not likely to become useful in circumstances with limited training data and/or only consumer-grade hardware available for learning. This is due to intrinsic limitations within the ViT architecture, that will be elaborated on below [subsectie]. The current paper investigates whether utilizing \textit{Transfer Learning} (TL) capabilities of ViTs can help overcome these limitations, and if this allows ViTs to become the preferred architecture in the aforementioned circumstances as well.
+
+This introduction section will first give high level descriptions of CNNs and ViTs, and how they compare to one another. What follows, is an explanation of TL, and why it might help ViTs in circumstances with limited data/compute available. Finally, background information on the topic of TL using ViTs is given, and a research question is proposed.
+
+\subsection{Convolutional Neural Networks}
+\paragraph{Architecture}
+TODO
+
+\paragraph{Behaviour}
+TODO
+
+% First type of reduction in number of weights (compared to MLP) is that it only looks at surrounding pixels, instead of all
+% Second type of reduction is that it re-uses the same weights for all pixels
+
+\subsection{Vision Transformers}
+Where a CNN reduces the number of trainable weights by taking an image's topology into account, a ViT does this by learning itself what information it should incorporate in successive representations of the input. As such, it is not restricted to a local receptive field, but can potentially include information from all over a the input image.
+
+ViTs were first introduced in [BRON], and built around the encoder stack of a \textit{Transformer Neural Network} [BRON].
+
+\paragraph{Self-attention}
+TODO
+
+\paragraph{From Transformer to ViT}
+
+% While a CNN is restricted to only incorporate information from its surrounding pixels in a subsequent layer, a ViT 
+
+\paragraph{A limitation of Vision Transformers}
+While ViTs [GREAT STUFF]; the fact that an image's topology is not incorporated in the architecture, makes that they lack a so called image specific \textit{Inductive Bias}, which CNNs do have. Intuitively this means a ViT first has to learn what an image is, before it can move on to the learning task at hand. The result is that they require substantially more training data (and time) than CNNs do. 
+% Bronnen waaruit dit blijkt?
+TODO
+
+% CNNs have image specific inductive bias: the architecture itself is tailored to 2D images, and as such has structural information about how images work built-in. This is not the case for ViTs, which lack an image specific inductive bias, which makes them very data hungry.
+
+\subsection{Transfer Learning}
+TODO
+
+\subsection{The current study}
+TODO
