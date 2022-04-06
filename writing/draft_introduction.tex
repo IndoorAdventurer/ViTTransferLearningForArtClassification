@@ -8,9 +8,14 @@ This introduction section will first give high level descriptions of CNNs and Vi
 \subsection{Convolutional Neural Networks}
 %SECOND DRAFT OF CNN EXPLANATION:
 \paragraph{Architecture}
-The modern CNN architecture is often attributed to [BRON]. It has asymptotically less trainable parameters per layer than the classical \textit{Multilayer Perceptron} (MLP) [BRON], and achieves this reduction in ways that make sense for the topology of an image. Firstly, connections are restricted to a neurons so called \textit{local receptive field}. This is a small patch of neurons in the previous layer, with a similar spatial location. The top right of figure [FIGREF] shows an example. Here, one neuron and its receptive field are highlighted. Also note how the hypothetical MLP implementation in the top left has many more connections overall.
+The modern CNN architecture is often attributed to [BRON]. It has asymptotically less trainable parameters per layer than the classical \textit{Multilayer Perceptron} (MLP) [BRON], and achieves this reduction in ways that make sense for the topology of an image. Firstly, connections are restricted to a neuron its so called \textit{local receptive field}. This is a small patch of neurons in the previous layer, with similar spatial location. The top right of figure [FIGREF] shows an example. Here, one neuron and its receptive field are highlighted. The top left shows a hypothetical MLP implementation. Note how it has many more connections overall.
 
-Secondly, instead of using a different set of trainable weights to connect a neuron to its receptive field, the same set is shared.
+Secondly, instead of using a different set of trainable weights to connect a neuron to its receptive field, the same set, called a \textit{convolution kernel}, is shared. In figure [FIGREF] the 4 accentuated connections correspond to one such kernel. The other shown connections don't add to the number of trainable weights, as they use this kernel as well. Essentially, a one-layered mini-MLP is slided over the input grid to produce the output grid -- which is called a \textit{feature map}. In reality, multiple kernels and feature maps exist per layer.
+
+Finally, to reduce the size even further, so called \textit{pooling layers} are added. These reduce the spatial resolution of a feature map by aggregating patches of neurons into one, using $max(\cdot)$, or $mean(\cdot)$, for example.
+
+\paragraph{Properties}
+The architecture as described, is largely invariant to shifts and small distortions of the input image. More important, is that CNNs can be seen as automatic feature extractors. It is well documented (see, for example, [REFS]) that the first layers of a CNN detect low level features, such as edges and corners. These are combined in subsequent layers to detect higher level features. The final layer then (hopefully) represents the input in an abstract manner, such that, for example, an MLP-type layer can extract all the information it needs from it to perform the task at hand.
 
 %FIRST DRAFT OF CNN EXPLANATION:
 %\paragraph{Architecture}
@@ -38,6 +43,7 @@ ViTs were first introduced in [BRON], and built around the encoder stack of a \t
 TODO
 
 \paragraph{From Transformer to ViT}
+TODO
 
 % While a CNN is restricted to only incorporate information from its surrounding pixels in a subsequent layer, a ViT 
 
