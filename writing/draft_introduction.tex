@@ -6,7 +6,6 @@ Exciting as this may be, a plain ViT is not likely to become useful in circumsta
 This introduction section will first give high level descriptions of CNNs and ViTs, and illustrate how they compare to one another. What follows, is an explanation of TL, and why it might help ViTs in circumstances with limited data/compute available. Finally, background information on the topic of TL using ViTs is given, and a research question is proposed.
 
 \subsection{Convolutional Neural Networks}
-%SECOND DRAFT OF CNN EXPLANATION:
 \paragraph{Architecture}
 The modern CNN architecture is often attributed to [BRON]. It has asymptotically less trainable parameters per layer than the classical \textit{Multilayer Perceptron} (MLP) [BRON], and achieves this reduction in ways that make sense for the topology of an image. Firstly, connections are restricted to a neuron its so called \textit{local receptive field}. This is a small patch of neurons in the previous layer, with similar spatial location. The top right of figure [FIGREF] shows an example. Here, one neuron and its receptive field are highlighted. The top left shows a hypothetical MLP implementation. Note how it has many more connections overall.
 
@@ -17,27 +16,23 @@ Finally, to reduce the size even further, so called \textit{pooling layers} are 
 \paragraph{Properties}
 The architecture as described, is largely invariant to shifts and small distortions of the input image. More important, is that CNNs can be seen as automatic feature extractors. It is well documented (see, for example, [REFS]) that the first layers of a CNN detect low level features, such as edges and corners. These are combined in subsequent layers to detect higher level features. The final layer then (hopefully) represents the input in an abstract manner, such that, for example, an MLP-type layer can extract all the information it needs from it to perform the task at hand.
 
-%FIRST DRAFT OF CNN EXPLANATION:
-%\paragraph{Architecture}
-% Het hele "This makes MLPs unfit" klinkt niet als een logisch gevolg. Meer uitleg nodig of schrappen >:-(
-%The modern CNN architecture is often attributed to [BRON], and can best be understood through comparison with the classical \textit{Multilayer Perceptron} (MLP) [BRON]. In this ANN architecture, any neuron in layer $x$ is connected to every neuron in subsequent layer $y$ (see top left of figure [FIGREF]). This makes MLPs unfit for CV applications, as an unreasonable amount of training data is required. Moreover, training data would need to account for the lack of built-in invariance to distortions/translations.
-
-%CNNs reduce the number of weights in ways that make sense for images. Firstly, connections to a neuron are limited to its so called \textit{local receptive field}, which is a small neighbourhood of neurons in the previous layer. Secondly, instead of using a different set of weights for every receptive field, the same set (called a \textit{convolution kernel}) is used for all. Figure [FIGREF] illustrates this in the top right. The 4 accentuated connections map the highlighted receptive field to a single neuron. Note that none of the other connections add to the number of trainable parameters, as the same weights are used to map any receptive field to its corresponding neuron. The 2D grid of neurons this results in, is called a \textit{feature map}. In reality, multiple kernels and feature maps exist per layer.
-
-%Besides convolutional layers, CNNs contain so called \textit{pooling layers}, which reduce the spatial resolution of a feature map by aggregating patches of neurons into one -- using $max(\cdot)$, or $mean(\cdot)$, for example.
-
-%\paragraph{Properties}
-%Weights sharing between receptive fields makes CNNs largely invariant to translations, as some pattern in the input would be processed by a convolution kernel the same, regardless of whether it occurs in the top right, or bottom left. In addition, pooling layers make the architecture invariant to slight distortions.
-
-%More important, is that CNNs can be seen as automatic feature extractors. It is well documented (see, for example, [REFS]) that the first layers of a CNN detect low level features, such as edges and corners. These are combined in subsequent layers to detect higher level features. The final layer then (hopefully) represents the input in an abstract way, such that, for example, an MLP layer can use it to perform the task at hand.
-
-% First type of reduction in number of weights (compared to MLP) is that it only looks at surrounding pixels, instead of all
-% Second type of reduction is that it re-uses the same weights for all pixels
-
 \subsection{Vision Transformers}
-Where a CNN reduces the number of trainable weights by taking an image's topology into account, a ViT does this by learning itself what information it should incorporate in successive representations of the input. As such, it is not restricted to a local receptive field, but can potentially include information from all over the input image.
+\paragraph{Architecture}
+Where a CNN reduces the number of trainable weights by taking an image's topology into account, a ViT does this by learning itself what information it should incorporate in successive representations of the input. As such, it is not restricted to a local receptive field, but can potentially include information from all over the previous layer.
 
-ViTs were first introduced in [BRON], and built around the encoder stack of a \textit{Transformer Neural Network} [BRON].
+ViTs were first introduced in [BRON], and are based on the \textit{Transformer} architecture [BRON]. This type of ANN was originally designed to solve problems in \textit{natural language processing} (a field it now dominates), and takes a variable length sequence of \textit{token embeddings}\footnote{The model has some vocabulary of tokens it knows, for example all words in the English language. For each it learns a vector representation, called a token embedding.} as input. While Transformers are made up of an \textit{encoder} and \textit{decoder}, the latter won't be discussed here, as it is discarded in the ViT architecture.
+
+Central to the encoder is the \textit{self-attention mechanism}. The \textit{attention heads} that implement it, start with 3 learned projection matrices.
+
+%The architecture consists of an \textit{encoder}, and \textit{decoder}, but since the latter is discarded in ViTs, it won't be discussed here.
+
+%Before entering the encoder, each token is converted into a corresponding vector representation, called a \textit{token embedding}. This is done using a learned mapping from tokens to vectors. To make the network aware of a token's location within the sequence, positional encodings are added to the embeddings as well\footnote{Trigonometric functions are used for this, instead of learned encodings.}.
+
+%The encoder itself is composed of a stack of \textit{encoder blocks}. The first block gets the embeddings as input; the rest the output of its predecessor. Each block contains two components, namely a \textit{multiheaded self-attention} layer, which will be discussed below, and a simple MLP that processes all positions (i.e. vectors) of the input sequence individually. Residual connections add a component's output to its input, and this sum is then normalized; i.e. $Normalize(x + Component(x))$\footnote{Note that this means the dimensions of a component's output are identical to that of its input.}.
+
+%Checklist:
+% - constant number of operations to relate tokens, so regardless of distance
+% - weight sharing because same learned operations are applied to each (each token goes through the same pipeline)
 
 \paragraph{Self-attention}
 TODO
@@ -47,7 +42,7 @@ TODO
 
 % While a CNN is restricted to only incorporate information from its surrounding pixels in a subsequent layer, a ViT 
 
-\paragraph{A limitation of Vision Transformers}
+\subsection{A limitation of Vision Transformers}
 While ViTs are promising; the fact that an image's topology is not incorporated in the architecture, makes that they lack a so called image specific \textit{Inductive Bias}, which CNNs do have. Intuitively this means a ViT first has to learn what an image is, before it can move on to the learning task at hand. The result is that they require substantially more training data (and time) than CNNs do. 
 % Bronnen waaruit dit blijkt?
 TODO
