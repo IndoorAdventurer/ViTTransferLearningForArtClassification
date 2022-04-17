@@ -1,0 +1,74 @@
+\ProvidesPackage{bachelorproject}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{multirow}
+\usepackage{bold-extra}
+\usepackage{fancyhdr}
+\usepackage{siunitx}
+\usepackage[runin]{abstract}
+\usepackage[round]{natbib}
+\usepackage{appendix}
+\usepackage{titling}
+
+\ifx\pdfoutput\undefined
+  % we are running LaTeX, not pdflatex
+  \usepackage{graphicx}
+\else
+  % we are running pdflatex, so convert .eps files to .pdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage{epstopdf}
+\fi
+\selectlanguage{english}
+\DeclareCaptionFont{bold}{\bfseries}
+\DeclareCaptionFont{normal}{\color{black}}
+\captionsetup{font=small,labelfont=bf,textfont=bf}
+
+% Abstract configuration
+\setlength{\abstitleskip}{-\parindent} % make abstract flushleft
+\setlength{\absleftindent}{6mm} % make abstract non-indented
+\setlength{\absrightindent}{6mm}
+% adjust the next two commands to set the size/weight you need
+\setlength{\absparindent}{6mm}
+\abslabeldelim{:} % add a colon to the abstract title
+\renewcommand{\abstractnamefont}{\normalfont\normalsize\bfseries}
+\renewcommand{\abstracttextfont}{\normalfont\normalsize}
+
+% Header configuration
+
+\pagestyle{fancy}
+\fancyhead{} % remove default contents
+\fancyfoot{} % remove default contents
+\setlength{\voffset}{-0.75in}
+\setlength{\headheight}{0.6in}
+\renewcommand{\headrulewidth}{0pt} % remove hline
+\rfoot{
+    \thepage
+}
+
+\fancypagestyle{firststyle}
+{
+   \fancyhf{}
+   \rfoot{\thepage}
+   \chead{\includegraphics[width=14cm]{./img/RUGR_FSE_logoEN_zwart_RGB}}
+}
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%by default LaTeX will place an extra space after a . this can disable that behavior:
+\frenchspacing % this is probably not necessary when using english instead of dutch
+
+% the following lines makes sure equations and algorithms are not just numbered 1, 2, ...,N but SectionNr.EquationNr
+\numberwithin{equation}{section}
+\numberwithin{algorithm}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
