@@ -18,7 +18,7 @@ The modern CNN architecture is often attributed to \citeauthor{lecun1998gradient
 %which describes how the topology of an image can be taken into account to sensibly reduce the number of weights per layer (i.e. by restricting connections to a neuron's so called local receptive field, and by sharing weights between ).
 %The top half of figure \ref{vitVsCnn} attempts to give an intuitive understanding of this, by drawing a comparison to the classical \textit{Multilayer Perceptron} (MLP).
 
-CNNs are largely invariant to shifts and small distortions of the input image. More important, is that they can be seen as automatic feature extractors. It is well established (e.g. \citeauthor{lecun1998gradient}, \citeyear{lecun1998gradient}) that the first layers of a CNN detect low level features, such as edges and corners. These are combined in subsequent layers to detect higher order features. The final layer should then give a representative summary of the input, such that, for example, an MLP-type layer can extract all the information it needs from it to perform the task at hand.
+CNNs are largely invariant to shifts and small distortions of the input image. More important, is that they can be seen as automatic feature extractors. It is well established (e.g. \citeauthor{lecun1998gradient}, \citeyear{yosinski2014transferable}; \citeauthor{yosinski2014transferable}, \citeyear{lecun1998gradient}) that the first layers of a CNN detect low level features, such as edges and corners. These are combined in subsequent layers to detect higher order features. The final layer should then give a representative summary of the input, such that, for example, an MLP-type layer can extract all the information it needs from it to perform the task at hand.
 
 %It has asymptotically less trainable parameters per layer than the classical \textit{Multilayer Perceptron} (MLP) [BRON], and achieves this reduction in ways that make sense for the topology of an image. Firstly, connections are restricted to a neuron its so called \textit{local receptive field}. This is a small patch of neurons in the previous layer, with similar spatial location. The top right of figure [FIGREF] shows an example. Here, one neuron and its receptive field are highlighted. The top left shows a hypothetical MLP implementation. Note how it has many more connections overall.
 
@@ -65,15 +65,29 @@ The original Transformer architecture was designed to solve problems in \textit{
 % While a CNN is restricted to only incorporate information from its surrounding pixels in a subsequent layer, a ViT 
 
 
-\paragraph{A limitation of Vision Transformers}
+\paragraph{A limitation of ViTs}
 While ViTs are promising; the fact that they are not tailored to CV tasks, makes that they lack a so called image specific \textit{Inductive Bias}, which CNNs do have. Intuitively this means a ViT first has to learn what an image is, before it can move on to the learning task at hand. The result is that they require substantially more training data (and time) than CNNs do. 
 
-It is for this reason the paper that first introduced ViTs \citep{dosovitskiy2020image} also mentions using pre-trained models rather than randomly initialised ones, as it allows general knowledge about images to be carried over to the new task. 
+It is for this reason the paper that first introduced ViTs \citep{dosovitskiy2020image} mentions using pre-trained models rather than randomly initialised ones, as it allows general knowledge about images to be carried over to the new task. This technique falls within the category of TL, which will be cover below. 
 
 % CNNs have image specific inductive bias: the architecture itself is tailored to 2D images, and as such has structural information about how images work built-in. This is not the case for ViTs, which lack an image specific inductive bias, which makes them very data hungry.
 
 \subsection{Transfer Learning}
-TODO
+Given two \textit{Machine Learning} (ML) problems, of which one is called the source, and the other the target task, Transfer Learning can be defined as \textit{exploiting knowledge implied in the source task to improve performance of an ML model on the target task}. A formal definition is found on p. 56 of \citeauthor{sabatelli2022contributions} (\citeyear{sabatelli2022contributions}), but for the purposes of this paper, the one above suffices.
+
+In practice, many TL techniques exist. The example given in section \ref{vits} can be described as \textit{fine-tuning} TL. Here, a pre-trained model is used as a starting point, and trained fully on the target task -- possibly with different hyper-parameters, and often with a new final layer that fits the task. \citeauthor{yosinski2014transferable} (\citeyear{yosinski2014transferable}) studied transferability properties of CNNs pre-trained on ImageNet, and suggested that \textit{fine-tuning} results in improved performance and generalizability compared to training from scratch. Moreover, while transferability decreased as source and target task became more dissimilar, utilizing TL still seemed to be preferred.
+
+% FINE-TUNING: "yosinski2014transferable" CNNs
+% 1) Lower layers contain general information that can easily be transferred (deze doe ik naar volgende stukje misschien)
+% 2) Distance between source and target task increases -> transferability decreases
+%       - BUT: still better than randomly initialized
+% 3) Increases generalizability (This one is important for me ;-) )
+
+A different TL technique is called \textit{off-the-shelf} (OTS) TL. It is similar to \textit{fine-tuning}, except that all but the final layer is kept frozen during training. \citeauthor{sharif2014cnn} (\citeyear{sharif2014cnn}) found that features extracted by a CNN pre-trained on ImageNet were general enough for OTS TL to work. More specifically, these OTS CNNs showed better performance than the (fully trained non-CNN) state of the art at the time. Besides reducing computational cost of training, a benefit of OTS TL is that it can prevent overfitting in cases where \textit{fine-tuning} would not \citep{yosinski2014transferable}.
+
+% OFF-THE-SHELF:
+% 1) "yosinski2014transferable": OTS can prevent overfitting where fine-tuning would overfit
+% 2) "yosinski2014transferable": first layers general information
 
 \subsection{The current study and related work}
 TODO
