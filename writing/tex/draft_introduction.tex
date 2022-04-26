@@ -1,7 +1,7 @@
 \section{Introduction}
 Since the introduction of AlexNet, roughly a decade ago, \textit{Convolutional Neural Networks} (CNNs) have played an important role in \textit{Computer Vision} (CV) \citep{krizhevsky2012imagened}. Recently, however, a new type of \textit{Artificial Neural Network} (ANN), called \textit{Vision Transformer} (ViT), gained state of the art performance on common learning benchmarks, including the ImageNet dataset\footnote{At the time of writing TODO is the best performing model, and the top TODO are all Transformer-based: (website)}.
 
-Exciting as this may be, a plain ViT is not likely to become useful in circumstances with limited training data and/or only consumer-grade hardware available for learning. This is due to a limitation that is inherent to the ViT architecture, which will be elaborated on in section \ref{vits}. Consequently, the current paper investigates whether utilizing \textit{Transfer Learning} (TL) capabilities of ViTs can help overcome these limitations, and if this allows ViTs to become the preferred architecture in the aforementioned circumstances as well.
+Exciting as this may be, a plain ViT is not likely to become useful in circumstances with limited training data and/or only consumer-grade hardware available for learning. This is due to a limitation inherent to the ViT architecture, which will be elaborated on in section \ref{vits}. Consequently, the current paper investigates whether utilizing \textit{Transfer Learning} (TL) capabilities of ViTs can help overcome these limitations, and if this allows ViTs to become the preferred architecture in the aforementioned circumstances as well.
 
 Before going into more detail, however, some background information is needed. The remainder of this section will first briefly describe CNNs and ViTs, and compare them to one another. What follows, is an explanation of TL, and why it might help ViTs in circumstances with limited data/compute available. Finally, related work is discussed, and a research question is proposed.
 
@@ -87,6 +87,7 @@ In practice, many TL techniques exist. The example given in section \ref{vits} c
 
 A different TL technique is called \textit{off-the-shelf} (OTS) TL. It is similar to fine-tuning, except that all but the final layer is kept frozen during training. \citeauthor{sharif2014cnn} (\citeyear{sharif2014cnn}) found that features extracted by a CNN pre-trained on ImageNet were general enough for OTS TL to work. More specifically, these OTS CNNs showed better performance than the (fully trained non-CNN) state of the art at the time. Besides reducing computational cost of training, a benefit of OTS TL is that it can prevent overfitting in cases where fine-tuning would not \citep{yosinski2014transferable}.
 
+% TODO!!! Maybe mention TL is a solution when target dataset is much smaller, and maybe mention model TL technique: information passed between source and target in the form of a pre-trained model!!! TODO TODO TODO
 % OFF-THE-SHELF:
 % 1) "yosinski2014transferable": OTS can prevent overfitting where fine-tuning would overfit
 % 2) "yosinski2014transferable": first layers general information
