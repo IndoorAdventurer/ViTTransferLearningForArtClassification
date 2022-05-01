@@ -1,4 +1,3 @@
-from ctypes.wintypes import RGB
 from torch.utils.data import Dataset
 from torchvision.io import read_image, ImageReadMode
 import pandas as pd
@@ -11,7 +10,7 @@ class RijksDataset(Dataset):
         """
         ## Default constructor
 
-        :param csv_file:  A file containing [*.jpg, "material"] pairs for each element in the dataset
+        :param csv_file:  A file containing [*.jpg, 'material'] pairs for each element in the dataset
         :param materials: A list containing all the materials, such that a ML model can learn to
                     predict indeces into this list
         :param img_dir:   Directory containing all .jpg files mentioned in :csv_file:
@@ -31,7 +30,7 @@ class RijksDataset(Dataset):
         """
         Returns pd.DataFrame containing [*.jpg, idx] pairs, such that materials[idx] == 'material'.
         """
-        df = pd.read_csv(csv_file)
+        df = pd.read_csv(csv_file, index_col=False)
 
         try:
             df["idx"] = df["material"].map(lambda mat: materials.index(mat))
