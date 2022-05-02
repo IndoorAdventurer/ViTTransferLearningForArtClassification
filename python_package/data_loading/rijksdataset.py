@@ -10,11 +10,11 @@ class RijksDataset(Dataset):
         """
         ## Default constructor
 
-        :param csv_file:  A file containing [*.jpg, 'material'] pairs for each element in the dataset
+        :param csv_file:  A file containing [*.jpg, 'material'] pairs for each element in the dataset\n
         :param materials: A list containing all the materials, such that a ML model can learn to
-                    predict indeces into this list
-        :param img_dir:   Directory containing all .jpg files mentioned in :csv_file:
-        :param transform and target_transform: apply transforms to input and output resp.
+                    predict indeces into this list\n
+        :param img_dir:   Directory containing all .jpg files mentioned in :csv_file:\n
+        :param transform and target_transform: apply transforms to input and output resp.\n
         """
         self._df = RijksDataset._processTable(csv_file, materials)
         self._img_dir = img_dir
