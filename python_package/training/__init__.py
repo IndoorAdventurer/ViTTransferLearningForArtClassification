@@ -1,1 +1,1 @@
-from .learningproblem import LearningProblem
+from .train import train

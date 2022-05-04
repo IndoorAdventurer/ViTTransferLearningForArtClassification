@@ -50,7 +50,7 @@ class RijksDataset(Dataset):
         x = read_image(
             path = path.join(self._img_dir, self._df.loc[idx, "jpg"]),
             mode = ImageReadMode.RGB
-        )
+        ).float() / 255
         if self._transform:
             x = self._transform(x)
         

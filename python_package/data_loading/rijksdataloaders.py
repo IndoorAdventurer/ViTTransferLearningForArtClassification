@@ -1,15 +1,19 @@
 from .rijksdataset import RijksDataset
 
+import os
+import torch
 from torch.utils.data import DataLoader
+from torch.nn.functional import one_hot
+from torchvision.transforms import Lambda
 import pandas as pd
 
 class RijksDataloaders:
     """
-    Encapsulates/groups dataloaders the training, validation, and testing set
+    Encapsulates/groups dataloaders for the training, validation, and testing set
     """
 
     def __init__(self, ds_name: str, hist_path: str, img_dir: str,
-                    transforms: dict, target_transforms: dict, batch_size: int):
+                    transforms: dict, batch_size: int):
         """
         ## Constructor
         dsName is a path to the dataset such that f'{dsName}-train.csv', f'{dsName}-val.csv',
@@ -18,7 +22,7 @@ class RijksDataloaders:
         is used to extract a list of materials, such that a model learns to predict indeces into
         this list.\n
         img_dir is the directory containing all the images.\n
-        transforms and target_transforms are dictionaries containing transforms to apply to each
+        transforms is a dictionary containing transforms to apply to each
         of the 3 datasets. If one key is defined, the same transform is applied to each dataset.
         If a key 'train' and 'rest' are defined, 'train' is applied for training, and 'rest' for
         testing and validating.\n
@@ -33,7 +37,6 @@ class RijksDataloaders:
             "materials": self.materials,
             "img_dir": img_dir,
             "transforms": transforms,
-            "target_transforms": target_transforms,
             "batch_size": batch_size
         }
 
@@ -46,13 +49,12 @@ class RijksDataloaders:
     def makeDataLoader(which: str, info: dict) -> DataLoader:
         """Helper function to create each of the 3 datasets"""
 
-        # Getting the right transforms (from key if exists, else the first value in dict):
+        # Getting the right transform (from key if exists, else the first value in dict):
         key = "train" if which == "train" else "rest"
-        transform = info["transforms"][key] if key in info["transforms"] \
-            else list(info["transforms"].values())[0]
-        target_transform = info["target_transforms"][key] if key in info["target_transforms"] \
-            else list(info["target_transforms"].values())[0]
+        t = info["transforms"]
+        transform = t[key] if key in t else list(t.values())[0]
         
         # Creating the dataset and dataloader:
-        ds = RijksDataset(f"{info['ds_name']}-{which}.csv", info['materials'], info['img_dir'], transform, target_transform)
-        return DataLoader(ds, batch_size=info["batch_size"], shuffle=True)
+        ds = RijksDataset(f"{info['ds_name']}-{which}.csv",
+                info['materials'], info['img_dir'], transform)
+        return DataLoader(ds, batch_size=info["batch_size"], shuffle=True, num_workers=os.cpu_count())
