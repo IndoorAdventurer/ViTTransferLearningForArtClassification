@@ -15,7 +15,8 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     lossfunc is the used loss function.\n
     optimizer is the used optimizer.\n
     num_epochs ... ah you get it.. ;-)\n\n
-    ### Returns the model that scored best on the validation set!
+    ### Returns the model that scored best on the validation set!\n
+    ### Also saves statistics of first epoch to first_epoch.csv and validation statistics to validation.csv
     """
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -28,11 +29,23 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     best_model = deepcopy(model.state_dict())
     best_accuracy = 0.0
 
+    # Record statistics of first batch to this file:
+    first_epoch_log = "first_epoch.csv"
+
+    # Preparing the validation csv file:
+    with open("validation.csv", "a") as f:
+        f.write("accuracy, mean_loss\n")
+
     for epoch in range(num_epochs):
         print(f"---EPOCH-{(epoch + 1):03}-OF-{num_epochs:03}-" + "-" * 30)
 
-        train_loop(model, dataloaders.train, lossfunc, optimizer, device)
+        train_loop(model, dataloaders.train, lossfunc, optimizer, device, first_epoch_log)
         accuracy = validation_loop(model, dataloaders.val, lossfunc, device)
+
+        # Set file to None so subsequent epochs won't be recorded:
+        # Reason behind this is that these epochs have seen all instances before
+        # so the statistics are less meaningfull.
+        first_epoch_log = None
 
         if accuracy > best_accuracy:
             print("New best model! Saving parameters.")
@@ -45,18 +58,23 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     print(f"Total training time was: {endTime - startTime} seconds.")
     print("The best model had an accuracy of: {best_accuracy:0.3f}.")
 
-def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, device):
+def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, device, savefile):
     model.train()
     percentDone = -1
     num_batches = len(dataloader)
-    batch_size = dataloader.batch_size
 
-    running_loss = 0.0
     running_accuracy = 0.0
+    running_loss = 0.0
+
+    # Adding column names to csv file to save to:
+    if savefile != None:
+        with open(savefile, "a") as f:
+            f.write("batch_size, accuracy, mean_loss\n")
 
     for batchnum, (x, y) in enumerate(dataloader):
         x = x.to(device)
         y = y.to(device)
+        batch_size = len(y)
 
         # Forward pass:
         pred = model(x)
@@ -67,10 +85,15 @@ def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, de
         loss.backward()
         optimizer.step()
 
-        # Update statistics:
-        running_loss += (1 / (batchnum + 1)) * (loss.item() - running_loss)
+        # Update statistics (neglecting fact that last batch is smaller):
         batch_acc = (pred.argmax(1) == y).type(torch.float).sum().item() / batch_size
         running_accuracy += (1 / (batchnum + 1)) * (batch_acc - running_accuracy)
+        running_loss += (1 / (batchnum + 1)) * (loss.item() - running_loss)
+
+        # Saving statistics to file if filename given:
+        if savefile != None:
+            with open(savefile, "a") as f:
+                f.write(f"{batch_size}, {batch_acc}, {running_loss}\n")
 
         # Update display 100 times per epoch:
         tmpPercent = int(100 * batchnum / num_batches)
@@ -107,8 +130,8 @@ def showProgress(percentDone: int, running_loss: float, running_acc: float):
 def validation_loop(model: nn.Module, dataloader: DataLoader, lossfunc, device):
     model.eval()
 
-    running_loss = 0.0
     running_accuracy = 0.0
+    running_loss = 0.0
     # TODO: Add more statistics :-)
 
     count = 0
@@ -125,15 +148,20 @@ def validation_loop(model: nn.Module, dataloader: DataLoader, lossfunc, device):
             # Update statistics (more precise than for training: taking size of last batch into account):
             for p, a in zip(pred, y):
                 count += 1
-                running_loss += (1 / count) * (loss.item() - running_loss)
                 running_accuracy += (1 / count) * ((p.argmax() == a).type(torch.float).item() - running_accuracy)
+                running_loss += (1 / count) * (loss.item() - running_loss)
 
+    # Print statistics:
     print(
 f"""Validation statistics:
-    Loss:     {running_loss:0.3f}
     Accuracy: {running_accuracy:0.3f}
+    Loss:     {running_loss:0.3f}
 """
     )
+
+    # Save statistics to validation file:
+    with open("validation.csv", "a") as f:
+        f.write("{running_accuracy}, {running_loss}\n")
 
     return running_accuracy
 

@@ -1,5 +1,7 @@
 *.pdf
 
+jpg_subset/
+
 __pycache__/
 *.py[cod]
 *$py.class

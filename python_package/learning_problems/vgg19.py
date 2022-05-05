@@ -3,12 +3,15 @@ from torch import nn
 from torchvision import models
 from torch.nn import Module
 
-def vgg19(off_the_shelf: bool, dl: RijksDataloaders = dataloaders) -> tuple[Module, RijksDataloaders]:
+def get_vgg19_problem(off_the_shelf: bool, dl: RijksDataloaders = dataloaders, pretrained: bool = True) -> tuple[Module, RijksDataloaders]:
     """
     Returns the whole problem statement for training vgg19 on the Rijksdataset.
-    In other words: a pre-trained model with the head replaced, and the dataloaders
+    In other words: a pre-trained model (with the head replaced), and the dataloaders.\n
+    :off_the_shelf: says if it should freeze all but the new head for learning.\n
+    :dataloaders: allows user to specify custom dataset.\n
+    :pretrained: states if it should load a model pretrained om ImageNet.\n
     """
-    model = models.vgg19(pretrained=True)
+    model = models.vgg19(pretrained=pretrained)
     
     # Prepare for off the shelf learning if needed:
     freezeLayers(model, off_the_shelf)
