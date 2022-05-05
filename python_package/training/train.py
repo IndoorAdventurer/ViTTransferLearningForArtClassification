@@ -56,7 +56,7 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     endTime = time()
     print("___TRAINING_ENDED_____" + "_" * 40)
     print(f"Total training time was: {endTime - startTime} seconds.")
-    print("The best model had an accuracy of: {best_accuracy:0.3f}.")
+    print(f"The best model had an accuracy of: {best_accuracy:0.3f}.")
 
 def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, device, savefile):
     model.train()

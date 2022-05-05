@@ -1,6 +1,6 @@
 *.pdf
 
-jpg_subset/
+jpg_subset
 
 __pycache__/
 *.py[cod]

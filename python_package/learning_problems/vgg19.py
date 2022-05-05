@@ -3,7 +3,7 @@ from torch import nn
 from torchvision import models
 from torch.nn import Module
 
-def get_vgg19_problem(off_the_shelf: bool, dl: RijksDataloaders = dataloaders, pretrained: bool = True) -> tuple[Module, RijksDataloaders]:
+def get_vgg19_problem(off_the_shelf: bool, dl = dataloaders, pretrained: bool = True):
     """
     Returns the whole problem statement for training vgg19 on the Rijksdataset.
     In other words: a pre-trained model (with the head replaced), and the dataloaders.\n
