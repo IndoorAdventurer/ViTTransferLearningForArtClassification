@@ -24,6 +24,11 @@ def test(model: nn.Module, dataloaders: RijksDataloaders, lossfunc):
     confdims = len(dataloaders.materials)
     confusion = torch.zeros((confdims, confdims), dtype=torch.int)
 
+    # Statistics to output at the end
+    running_accuracy = 0.0
+    running_loss = 0.0
+    count = 0
+
     with torch.no_grad():
         for x, y in dataloaders.test:
             x = x.to(device)
@@ -42,16 +47,24 @@ def test(model: nn.Module, dataloaders: RijksDataloaders, lossfunc):
                 dfPredictions = pd.concat([dfPredictions, newRow], ignore_index=True)
 
                 confusion[p.argmax().item()][a.item()] += 1
+
+                # Updating statistics to show at the end:
+                count += 1
+                running_accuracy += (1 / count) * ((p.argmax() == a).type(torch.float).item() - running_accuracy)
+                running_loss += (1 / count) * (loss.item() - running_loss)
+
+            print(f"\033[F\033[KAccuracy: {running_accuracy:0.3f}; Mean loss: {running_loss:0.3f}")
     
     # Saving predictions
-    dfPredictions.to_csv("test_predictions.csv")
+    dfPredictions.to_csv("test_predictions.csv", index=False)
 
     # Creating dataframe from the confusion matrix and saving it:
     dfConf = pd.DataFrame(confusion.numpy(), columns=dataloaders.materials)
     dfConf["predictions"] = dataloaders.materials
     columns = dfConf.columns.to_list()
     dfConf = dfConf[columns[-1:] + columns[:-1]]
-    dfConf.to_csv("test_confusion.csv")
+    dfConf.to_csv("test_confusion.csv", index=False)
 
     print("TESTING HAS ENDED!\n"
-          "   Results saved to 'test_predictions.csv' and 'test_confusion.csv'")
+          "   Results saved to 'test_predictions.csv' and 'test_confusion.csv'\n"
+         f"   Final accuracy was: {running_accuracy:0.3f}; Mean loss was: {running_loss:0.3f}")

@@ -97,7 +97,7 @@ def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, de
         # Saving statistics to file if filename given:
         if savefile != None:
             with open(savefile, "a") as f:
-                f.write(f"{batch_size},{batch_acc},{running_loss}\n")
+                f.write(f"{batch_size},{batch_acc},{loss.item()}\n")
 
         # Update display 100 times per epoch:
         tmpPercent = int(100 * batchnum / num_batches)
