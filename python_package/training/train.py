@@ -34,7 +34,7 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
 
     # Preparing the validation csv file:
     with open("validation.csv", "a") as f:
-        f.write("accuracy, mean_loss\n")
+        f.write("accuracy,mean_loss\n")
 
     for epoch in range(num_epochs):
         print(f"---EPOCH-{(epoch + 1):03}-OF-{num_epochs:03}-" + "-" * 30)
@@ -58,6 +58,10 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     print(f"Total training time was: {endTime - startTime} seconds.")
     print(f"The best model had an accuracy of: {best_accuracy:0.3f}.")
 
+    # Return the best model found:
+    model.load_state_dict(best_model)
+    return model
+
 def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, device, savefile):
     model.train()
     percentDone = -1
@@ -69,7 +73,7 @@ def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, de
     # Adding column names to csv file to save to:
     if savefile != None:
         with open(savefile, "a") as f:
-            f.write("batch_size, accuracy, mean_loss\n")
+            f.write("batch_size,accuracy,mean_loss\n")
 
     for batchnum, (x, y) in enumerate(dataloader):
         x = x.to(device)
@@ -93,7 +97,7 @@ def train_loop(model: nn.Module, dataloader: DataLoader, lossfunc, optimizer, de
         # Saving statistics to file if filename given:
         if savefile != None:
             with open(savefile, "a") as f:
-                f.write(f"{batch_size}, {batch_acc}, {running_loss}\n")
+                f.write(f"{batch_size},{batch_acc},{running_loss}\n")
 
         # Update display 100 times per epoch:
         tmpPercent = int(100 * batchnum / num_batches)
@@ -132,8 +136,6 @@ def validation_loop(model: nn.Module, dataloader: DataLoader, lossfunc, device):
 
     running_accuracy = 0.0
     running_loss = 0.0
-    # TODO: Add more statistics :-)
-
     count = 0
 
     with torch.no_grad():
@@ -161,7 +163,7 @@ f"""Validation statistics:
 
     # Save statistics to validation file:
     with open("validation.csv", "a") as f:
-        f.write("{running_accuracy}, {running_loss}\n")
+        f.write(f"{running_accuracy},{running_loss}\n")
 
     return running_accuracy
 
