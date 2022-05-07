@@ -1,9 +1,9 @@
-from python_package.learning_problems import get_resnet50_problem
+import python_package.learning_problems as probs
 from python_package.training import train
 
 from torch import nn, optim
 
-model, dl = get_resnet50_problem(True)
+model, dl = probs.get_beit_b_16_problem(True)
 
 loss = nn.CrossEntropyLoss()
 optimizer = optim.RMSprop([param for param in model.parameters() if param.requires_grad == True])

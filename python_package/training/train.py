@@ -6,7 +6,7 @@ from ..data_loading import RijksDataloaders
 from time import time
 from copy import deepcopy
 
-def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, num_epochs: int):
+def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, max_epochs: int, early_stop: int = 10):
     """
     ## Function for training of a model
 
@@ -14,7 +14,8 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     dataloaders is a class encapsulating the training, validating and testing sets.\n
     lossfunc is the used loss function.\n
     optimizer is the used optimizer.\n
-    num_epochs ... ah you get it.. ;-)\n\n
+    max_epochs maximum number of epochs if no early stopping occured\n
+    early_stop if no new maximum is found after this many trials, it stops\n
     ### Returns the model that scored best on the validation set!\n
     ### Also saves statistics of first epoch to first_epoch.csv and validation statistics to validation.csv
     """
@@ -28,6 +29,7 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     # Keeping track of the best model
     best_model = deepcopy(model.state_dict())
     best_accuracy = 0.0
+    best_epoch = 0
 
     # Record statistics of first batch to this file:
     first_epoch_log = "first_epoch.csv"
@@ -36,8 +38,8 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     with open("validation.csv", "a") as f:
         f.write("accuracy,mean_loss\n")
 
-    for epoch in range(num_epochs):
-        print(f"---EPOCH-{(epoch + 1):03}-OF-{num_epochs:03}-" + "-" * 30)
+    for epoch in range(max_epochs):
+        print(f"---EPOCH-{(epoch + 1):03}-OF-{max_epochs:03}-" + "-" * 30)
 
         train_loop(model, dataloaders.train, lossfunc, optimizer, device, first_epoch_log)
         accuracy = validation_loop(model, dataloaders.val, lossfunc, device)
@@ -51,7 +53,11 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
             print("New best model! Saving parameters.")
             best_model = deepcopy(model.state_dict())
             best_accuracy = accuracy
+            best_epoch = epoch
             torch.save(best_model, "best.pth")
+        elif epoch - best_epoch >= early_stop:
+            print("Early stop occured.")
+            break
 
     endTime = time()
     print("___TRAINING_ENDED_____" + "_" * 40)
