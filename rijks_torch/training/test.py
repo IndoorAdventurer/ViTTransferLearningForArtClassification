@@ -41,7 +41,7 @@ def test(model: nn.Module, dataloaders: RijksDataloaders, lossfunc):
             # Update statistics (more precise than for training: taking size of last batch into account):
             for p, a in zip(pred, y):
                 newRow = pd.DataFrame(
-                    [list(p.numpy()) + [a.item(), dataloaders.materials[a.item()], loss.item()]],
+                    [list(p.cpu().numpy()) + [a.item(), dataloaders.materials[a.item()], loss.item()]],
                     columns=dfPredictions.columns
                 )
                 dfPredictions = pd.concat([dfPredictions, newRow], ignore_index=True)

@@ -61,7 +61,7 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
 
     endTime = time()
     print("___TRAINING_ENDED_____" + "_" * 40)
-    print(f"Total training time was: {endTime - startTime} seconds.")
+    print(f"Total training time was: {(endTime - startTime):0.3f} seconds.")
     print(f"The best model had an accuracy of: {best_accuracy:0.3f}.")
 
     # Return the best model found:
@@ -172,4 +172,3 @@ f"""Validation statistics:
         f.write(f"{running_accuracy},{running_loss}\n")
 
     return running_accuracy
-
