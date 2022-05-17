@@ -1,7 +1,8 @@
 # Contains defaul values that most models will likely use
+# After update it only contains methods to create defaults
 
 from torchvision import transforms
-from ..data_loading.rijksdataloaders import RijksDataloaders
+
 
 def freezeLayers(model, off_the_shelf: bool):
     """Prepare model for off the shelf learning if off_the_shelf==True"""
@@ -31,10 +32,3 @@ def buildTransform(imnet_norm: bool, imsize: int = 224, extratransforms = None) 
         tfs += extratransforms
     
     return transforms.Compose(tfs)
-
-dataset_fullsize = "data_annotations/fullsize"
-hist_path = "data_annotations/fullsize-hist.csv"
-img_dir = "jpg_subset/"
-transformdict = {"all": buildTransform(imnet_norm=True)}
-batch_size = 32
-dataloaders = RijksDataloaders(dataset_fullsize, hist_path, img_dir, transformdict, batch_size)

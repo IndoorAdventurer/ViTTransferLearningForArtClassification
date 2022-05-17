@@ -1,8 +1,8 @@
-from .defaults import dataloaders, freezeLayers
+from .defaults import freezeLayers
 from torch import nn
 import timm
 
-def get_swin_b_problem(off_the_shelf: bool, dl = dataloaders, pretrained: bool = True):
+def get_swin_b_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     """
     Returns the whole problem statement for training swin_b on the Rijksdataset.
     In other words: a pre-trained model (with the head replaced), and the dataloaders.\n

@@ -1,8 +1,8 @@
-from .defaults import dataloaders, freezeLayers
+from .defaults import freezeLayers
 from torch import nn
 import timm
 
-def get_beit_b_16_problem(off_the_shelf: bool, dl = dataloaders, pretrained: bool = True):
+def get_beit_b_16_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     """
     Returns the whole problem statement for training beit_base_16 on the Rijksdataset.
     In other words: a pre-trained model (with the head replaced), and the dataloaders.\n

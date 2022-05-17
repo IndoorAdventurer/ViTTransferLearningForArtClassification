@@ -16,3 +16,4 @@ from .swin_b import get_swin_b_problem
 from .swin_t import get_swin_t_problem
 from .beit_b_16 import get_beit_b_16_problem
 from .deit_b_16 import get_deit_b_16_problem
+from .deit_t_16 import get_deit_t_16_problem
