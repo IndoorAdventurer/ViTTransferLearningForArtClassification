@@ -1,0 +1,6 @@
+Task,# Samples,# Classes,Gini coefficient,Sample overlap
+Material classification,7788 (96583),30 (136),0.563 (0.980),0.798
+Type classification,9607 (77628),30 (801),0.466 (0.974),0.686
+Artist classification,6530 (38296),30 (8592),0.236 (0.676),1
+* Between brackets the values before rebalancing the dataset,,,,
+* Sample overlap is the average amount of overlap between 2 of the 5 randomly generated datasets,,,,
