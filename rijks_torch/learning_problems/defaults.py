@@ -29,6 +29,6 @@ def buildTransform(imnet_norm: bool, imsize: int = 224, extratransforms = None) 
         tfs += [transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]
     
     if extratransforms != None:
-        tfs += extratransforms
+        tfs = extratransforms + tfs
     
     return transforms.Compose(tfs)

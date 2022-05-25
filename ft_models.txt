@@ -1,0 +1,8 @@
+vgg19
+resnet50
+convnext_t
+efficientnetv2_t
+vit_t_16
+swin_t
+beit_b_16
+deit_t_16
