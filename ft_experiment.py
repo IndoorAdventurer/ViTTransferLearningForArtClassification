@@ -1,5 +1,7 @@
+from sched import scheduler
 import sys
 from torch import nn, optim
+from torchvision import transforms
 import torch
 import rijks_torch.learning_problems as probs
 import rijks_torch.learning_problems.defaults as defs
@@ -33,18 +35,23 @@ def main():
         ds_name=dataset_files,
         hist_path=dataset_files + "-hist.csv",
         img_dir=dataset_jpg_dir,
-        transforms={"all": defs.buildTransform(imnet_norm=True)},
-        batch_size=64
+        transforms={"rest": defs.buildTransform(imnet_norm=True),
+                "train": defs.buildTransform(imnet_norm=True, extratransforms = [
+                    transforms.RandomRotation(10),
+                    transforms.RandomHorizontalFlip()
+                ])},
+        batch_size=32
     )
 
     # Get the model tailored to specification. Using getattr because function from cli args
     model, dl = getattr(probs, f"get_{model_name}_problem")(off_the_shelf=False, dl=datloader)
 
-    loss = nn.CrossEntropyLoss()
-    optimizer = optim.Adam([param for param in model.parameters() if param.requires_grad == True], lr=5e-6)
+    loss = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = optim.Adam([param for param in model.parameters() if param.requires_grad == True], lr=1e-4)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2, min_lr=5e-7)
 
     # Training and validating (best model on val set returned):
-    model = train(model, dl, loss, optimizer, name=experiment_name)
+    model = train(model, dl, loss, optimizer, scheduler=scheduler, early_stop=10, name=experiment_name)
 
     # Testing model that performed best on validation set:
     test(model, dl, loss, name=experiment_name)

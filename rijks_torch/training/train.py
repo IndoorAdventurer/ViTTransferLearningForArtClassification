@@ -1,12 +1,18 @@
 import torch
-from torch import nn
+from torch import nn, optim
 from torch.utils.data import DataLoader
 from ..data_loading import RijksDataloaders
 
 from time import time
 from copy import deepcopy
 
-def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, max_epochs: int = 200, early_stop: int = 7, name: str = "default"):
+def train(model: nn.Module,
+          dataloaders: RijksDataloaders,
+          lossfunc, optimizer, max_epochs:
+          int = 200,
+          early_stop: int = 7,
+          scheduler: optim.lr_scheduler.ReduceLROnPlateau = None,
+          name: str = "default"):
     """
     ## Function for training of a model
 
@@ -16,6 +22,7 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     optimizer is the used optimizer.\n
     max_epochs maximum number of epochs if no early stopping occured\n
     early_stop if no new best is found after this many trials, training stops\n
+    scheduler dynamically changes the learning rate\n
     name is the name of the experiment. Gets prepended to output filenames\n
     ### Returns the model that scored best on the validation set!\n
     ### Also saves validation statistics to {name}-validation.csv
@@ -41,6 +48,10 @@ def train(model: nn.Module, dataloaders: RijksDataloaders, lossfunc, optimizer, 
     for epoch in range(max_epochs):
         train_loop(model, dataloaders.train, lossfunc, optimizer, device)
         loss = validation_loop(model, dataloaders.val, lossfunc, device, validation_log)
+        
+        # Scheduler will always be ReduceLROnPlateau, so needs loss as input
+        if scheduler != None:
+            scheduler.step(loss)
 
         # Save best model and early stop if no new best for too long:
         if loss < best_loss:

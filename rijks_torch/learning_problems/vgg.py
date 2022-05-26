@@ -19,3 +19,13 @@ def get_vgg19_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     model.classifier[6] = nn.Linear(4096, len(dl.materials))
 
     return model, dl
+
+
+def get_vgg19_drop_problem(off_the_shelf: bool, dl, pretrained: bool = True):
+    """ Same as 'get_vgg19_problem' but with a dropout layer. This version is used for fine tuning """
+    model, dl = get_vgg19_problem(off_the_shelf, dl, pretrained)
+    model.classifier[6] = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(4096, len(dl.materials))
+    )
+    return model, dl

@@ -54,6 +54,9 @@ def get_swin_t_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     freezeLayers(model, off_the_shelf)
     
     # Replace head with one that fits the task
-    model.head = nn.Linear(768, len(dl.materials))
+    model.head = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(768, len(dl.materials))
+    )
 
     return model, dl

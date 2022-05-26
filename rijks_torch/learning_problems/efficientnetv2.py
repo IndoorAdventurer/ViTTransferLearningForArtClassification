@@ -35,6 +35,9 @@ def get_efficientnetv2_t_problem(off_the_shelf: bool, dl, pretrained: bool = Tru
     freezeLayers(model, off_the_shelf)
     
     # Replace head with one that fits the task
-    model.classifier = nn.Linear(1024, len(dl.materials))
+    model.classifier = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(1024, len(dl.materials))
+    )
 
     return model, dl

@@ -54,6 +54,9 @@ def get_convnext_t_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     freezeLayers(model, off_the_shelf)
     
     # Replace head with one that fits the task
-    model.classifier[2] = nn.Linear(768, len(dl.materials))
+    model.classifier[2] = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(768, len(dl.materials))
+    )
 
     return model, dl

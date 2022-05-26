@@ -1,8 +1,8 @@
-vgg19
-resnet50
+vgg19_drop
+resnet50_drop
 convnext_t
 efficientnetv2_t
 vit_t_16
 swin_t
-beit_b_16
+beit_b_16_drop
 deit_t_16

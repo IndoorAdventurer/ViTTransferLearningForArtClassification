@@ -19,3 +19,13 @@ def get_beit_b_16_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     model.head = nn.Linear(768, len(dl.materials))
 
     return model, dl
+
+
+def get_beit_b_16_drop_problem(off_the_shelf: bool, dl, pretrained: bool = True):
+    """ Same but with a dropout layer. This version is used for fine tuning """
+    model, dl = get_beit_b_16_problem(off_the_shelf, dl, pretrained)
+    model.head = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(768, len(dl.materials))
+    )
+    return model, dl
