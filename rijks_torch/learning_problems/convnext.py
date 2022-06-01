@@ -21,6 +21,16 @@ def get_convnext_b_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     return model, dl
 
 
+def get_convnext_b_drop_problem(off_the_shelf: bool, dl, pretrained: bool = True):
+    """ Same but with a dropout layer. This version is used for fine tuning """
+    model, dl = get_convnext_b_problem(off_the_shelf, dl, pretrained)
+    model.classifier[2] = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(1024, len(dl.materials))
+    )
+    return model, dl
+
+
 def get_convnext_s_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     """
     Returns the whole problem statement for training convnext_small on the Rijksdataset.

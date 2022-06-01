@@ -1,4 +1,8 @@
 *.pdf
+*.log
+*.out
+
+.vscode/
 
 jpg_subset
 

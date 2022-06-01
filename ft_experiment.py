@@ -48,7 +48,7 @@ def main():
 
     loss = nn.CrossEntropyLoss(label_smoothing=0.1)
     optimizer = optim.Adam([param for param in model.parameters() if param.requires_grad == True], lr=1e-4)
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2, min_lr=5e-7)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.1, patience=2, min_lr=5e-7)
 
     # Training and validating (best model on val set returned):
     model = train(model, dl, loss, optimizer, scheduler=scheduler, early_stop=10, name=experiment_name)

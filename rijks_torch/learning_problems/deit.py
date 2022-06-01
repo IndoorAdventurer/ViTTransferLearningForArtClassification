@@ -21,6 +21,16 @@ def get_deit_b_16_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     return model, dl
 
 
+def get_deit_b_16_drop_problem(off_the_shelf: bool, dl, pretrained: bool = True):
+    """ Same but with a dropout layer. This version is used for fine tuning """
+    model, dl = get_deit_b_16_problem(off_the_shelf, dl, pretrained)
+    model.head = nn.Sequential(
+        nn.Dropout(p=0.2),
+        nn.Linear(768, len(dl.materials))
+    )
+    return model, dl
+
+
 def get_deit_t_16_problem(off_the_shelf: bool, dl, pretrained: bool = True):
     """
     Returns the whole problem statement for training deit_tiny_16 on the Rijksdataset.

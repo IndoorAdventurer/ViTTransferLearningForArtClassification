@@ -1,0 +1,4 @@
+For material classification and artist classification I took advantage of v100's
+mixed precision speedup capabilities, while I didn't for off the shelf learning.
+This means these results should pretty much be discarded. It is not a fair
+comparison. Only look at type classification.
