@@ -1,0 +1,11 @@
+get_deit_attention_layers.py and get_swin_attention_layers.py save all
+attention layers for a given state-dict and input image in the form of
+a numpy .npy binary file.
+
+These scripts are called by all_attention_layers.py, which also stores
+the input image as a .npy (both color and black and white).
+
+Attention layers can then be processed with the attention_rollout.ipynb
+notebook, which works for both swin and deit models. It is, however,
+recommended that one uses gpu acceleration in the case of swin, as
+it needs to multiply 23 matrices of 3136 x 3136!
