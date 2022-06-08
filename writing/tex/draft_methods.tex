@@ -1,11 +1,27 @@
 \section{Methods}
 
 % Experiments build upon Sabatelli et al.
+Most of the experiments and analysis discussed below build upon the work done in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}).
 
 \subsection{Dataset}
 % Mention the challenges and show the table, of course. Also add max and min classes per category to the table maybe
-% Don't forget to tell that images get scaled and cropped to 224 * 224 size and imagenet normalized
+% Don't forget to tell that images get scaled and cropped to 224 * 224 size and imagenet normalised
 % Dataset described in more detail in Appendix A, including histograms and confusion matrices + balancing 'algorithm'
+
+\begin{table*}[tb]
+\centering
+\small
+\begin{tabular}{lllll}
+\hline
+\textbf{Task} & \textbf{\# Samples} & \textbf{\# Classes} & \textbf{Gini coefficient} & \textbf{Sample overlap} \\ \hline
+Type classification & 9607 (77628) & 30 (801) & 0.466 (0.974) & 0.686 \\
+Material classification & 7788 (96583) & 30 (136) & 0.563 (0.980) & 0.798 \\
+Artist classification & 6530 (38296) & 30 (8592) & 0.236 (0.676) & 1 \\
+Scaling experiment & 7926 (77628) & 15 (801) & 0.300 (0.974) & - \\ \hline
+\end{tabular}
+\caption{Overview of the used datasets. Values between brackets show the situation before balancing operations were performed. `Sample overlap' gives the average overlap between 2 of the 5 randomly generated sets per task ($i$ and $j$ where $i \neq j$).}
+\label{methods:datasets}
+\end{table*}
 
 \subsection{Models}
 % General information (4 per type, base/tiny etc)

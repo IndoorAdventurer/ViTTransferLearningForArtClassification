@@ -1,0 +1,199 @@
+\section{Results}
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ots_type_acc.pdf_tex}
+    \caption{Type}
+    \label{results:img:ots_type}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ots_mat_acc.pdf_tex}
+    \caption{Material}
+    \label{results:img:ots_mat}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ots_artist_acc.pdf_tex}
+    \caption{Artist}
+    \label{results:img:ots_artist}
+    \end{subfigure}
+    \caption{Validation accuracy using off the shelf models.}
+\end{figure*}
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & 86.06\% (${\pm 1.06\%}$) & 84.13\% (${\pm 1.57\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}89.43\% (${\pm 0.93\%}$) & \cellcolor{bestcol}87.47\% (${\pm 1.02\%}$)  \\
+\textbf{beit\_b\_16} & \cellcolor{worstcol}82.26\% (${\pm 0.72\%}$) & \cellcolor{worstcol}77.75\% (${\pm 0.27\%}$)  \\
+\textbf{deit\_b\_16} & 88.18\% (${\pm 0.66\%}$) & 85.36\% (${\pm 0.54\%}$)  \\\hdashline
+\textbf{vgg19} & 83.93\% (${\pm 0.72\%}$) & 83.35\% (${\pm 0.81\%}$)  \\
+\textbf{resnet50} & 85.51\% (${\pm 0.64\%}$) & 82.33\% (${\pm 1.85\%}$)  \\
+\textbf{efficientnetv2\_m} & 83.41\% (${\pm 0.76\%}$) & 82.05\% (${\pm 1.25\%}$)  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}89.19\% (${\pm 0.64\%}$) & \cellcolor{secondbestcol}86.95\% (${\pm 1.38\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Type classification off the shelf}
+\label{results:tab:ots_type}
+\end{table}
+
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & 81.78\% (${\pm 0.48\%}$) & 67.38\% (${\pm 1.37\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}85.87\% (${\pm 0.35\%}$) & \cellcolor{bestcol}71.19\% (${\pm 1.60\%}$)  \\
+\textbf{beit\_b\_16} & 76.87\% (${\pm 0.96\%}$) & 60.16\% (${\pm 1.56\%}$)  \\
+\textbf{deit\_b\_16} & 82.80\% (${\pm 1.12\%}$) & 66.46\% (${\pm 1.03\%}$)  \\\hdashline
+\textbf{vgg19} & 76.87\% (${\pm 0.44\%}$) & 61.39\% (${\pm 1.47\%}$)  \\
+\textbf{resnet50} & 80.99\% (${\pm 0.82\%}$) & 65.51\% (${\pm 0.93\%}$)  \\
+\textbf{efficientnetv2\_m} & \cellcolor{worstcol}75.96\% (${\pm 1.24\%}$) & \cellcolor{worstcol}59.15\% (${\pm 1.24\%}$)  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}84.14\% (${\pm 0.92\%}$) & \cellcolor{secondbestcol}69.10\% (${\pm 1.05\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Material classification off the shelf}
+\label{results:tab:ots_mat}
+\end{table}
+
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & 84.89\% (${\pm 0.46\%}$) & 81.42\% (${\pm 0.42\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}90.40\% (${\pm 0.65\%}$) & \cellcolor{bestcol}88.64\% (${\pm 0.78\%}$)  \\
+\textbf{beit\_b\_16} & 79.70\% (${\pm 0.69\%}$) & 75.35\% (${\pm 1.09\%}$)  \\
+\textbf{deit\_b\_16} & 88.13\% (${\pm 0.76\%}$) & 85.62\% (${\pm 0.87\%}$)  \\\hdashline
+\textbf{vgg19} & 82.01\% (${\pm 0.66\%}$) & 78.10\% (${\pm 0.77\%}$)  \\
+\textbf{resnet50} & 87.71\% (${\pm 1.06\%}$) & 85.12\% (${\pm 1.34\%}$)  \\
+\textbf{efficientnetv2\_m} & \cellcolor{worstcol}78.62\% (${\pm 1.07\%}$) & \cellcolor{worstcol}73.92\% (${\pm 0.96\%}$)  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}90.13\% (${\pm 0.94\%}$) & \cellcolor{secondbestcol}87.84\% (${\pm 1.07\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Artist classification off the shelf}
+\label{results:tab:ots_artist}
+\end{table}
+
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ft_type_acc.pdf_tex}
+    \caption{Type}
+    \label{results:img:ft_type}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ft_mat_acc.pdf_tex}
+    \caption{Material}
+    \label{results:img:ft_mat}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.32\textwidth}
+    \def\svgwidth{5.5cm}
+    \input{img/ft_artist_acc.pdf_tex}
+    \caption{Artist}
+    \label{results:img:ft_artist}
+    \end{subfigure}
+    \caption{Validation accuracy using fine-tuned models.}
+\end{figure*}
+
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & \cellcolor{worstcol}90.11\% (${\pm 0.35\%}$) & 87.40\% (${\pm 0.29\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}92.17\% (${\pm 0.98\%}$) & \cellcolor{secondbestcol}89.71\% (${\pm 1.03\%}$)  \\
+\textbf{beit\_b\_16} & 90.81\% (${\pm 0.41\%}$) & 87.95\% (${\pm 0.69\%}$)  \\
+\textbf{deit\_b\_16} & 91.78\% (${\pm 0.64\%}$) & 89.22\% (${\pm 0.90\%}$)  \\\hdashline
+\textbf{vgg19} & 90.54\% (${\pm 0.37\%}$) & \cellcolor{worstcol}87.05\% (${\pm 1.03\%}$)  \\
+\textbf{resnet50} & 91.78\% (${\pm 0.44\%}$) & 88.24\% (${\pm 0.59\%}$)  \\
+\textbf{efficientnetv2\_m} & 90.87\% (${\pm 0.67\%}$) & 88.34\% (${\pm 1.37\%}$)  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}92.15\% (${\pm 0.40\%}$) & \cellcolor{bestcol}89.82\% (${\pm 1.18\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Type classification fine-tuned}
+\label{results:tab:ft_type}
+\end{table}
+
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & 87.42\% (${\pm 0.45\%}$) & 73.46\% (${\pm 1.44\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}89.35\% (${\pm 0.68\%}$) & 77.16\% (${\pm 2.98\%}$)  \\
+\textbf{beit\_b\_16} & \cellcolor{worstcol}85.74\% (${\pm 0.37\%}$) & \cellcolor{worstcol}72.12\% (${\pm 1.38\%}$)  \\
+\textbf{deit\_b\_16} & 87.85\% (${\pm 1.12\%}$) & 74.42\% (${\pm 1.99\%}$)  \\\hdashline
+\textbf{vgg19} & 85.74\% (${\pm 1.40\%}$) & 72.43\% (${\pm 3.03\%}$)  \\
+\textbf{resnet50} & 88.69\% (${\pm 0.99\%}$) & \cellcolor{secondbestcol}77.97\% (${\pm 2.25\%}$)  \\
+\textbf{efficientnetv2\_m} & 87.55\% (${\pm 1.15\%}$) & 75.31\% (${\pm 1.60\%}$)  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}88.79\% (${\pm 1.07\%}$) & \cellcolor{bestcol}78.40\% (${\pm 1.26\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Material classification fine-tuned}
+\label{results:tab:ft_mat}
+\end{table}
+
+
+\begin{table}[]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lll}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Balanced accuracy} \\ \hline
+\textbf{vit\_b\_16} & 92.05\% (${\pm 0.44\%}$) & 89.77\% (${\pm 0.38\%}$)  \\
+\textbf{swin\_b} & \cellcolor{bestcol}95.05\% (${\pm 0.47\%}$) & \cellcolor{bestcol}93.94\% (${\pm 0.81\%}$)  \\
+\textbf{beit\_b\_16} & \cellcolor{worstcol}91.27\% (${\pm 1.13\%}$) & \cellcolor{worstcol}88.83\% (${\pm 1.63\%}$)  \\
+\textbf{deit\_b\_16} & 93.37\% (${\pm 1.15\%}$) & 91.67\% (${\pm 1.55\%}$)  \\\hdashline
+\textbf{vgg19} & 92.20\% (${\pm 0.49\%}$) & 90.18\% (${\pm 0.72\%}$)  \\
+\textbf{resnet50} & \cellcolor{secondbestcol}94.72\% (${\pm 0.74\%}$) & \cellcolor{secondbestcol}93.41\% (${\pm 1.05\%}$)  \\
+\textbf{efficientnetv2\_m} & 92.65\% (${\pm 0.54\%}$) & 90.84\% (${\pm 0.51\%}$)  \\
+\textbf{convnext\_b} & 94.60\% (${\pm 0.54\%}$) & 93.13\% (${\pm 0.61\%}$)  \\\hline
+\end{tabular}
+}
+\caption{Artist classification fine-tuned}
+\label{results:tab:ft_artist}
+\end{table}
+
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+    \def\svgwidth{7.7cm}
+    \input{img/ots_scale_acc.pdf_tex}
+    \caption{Off the shelf}
+    \label{results:img:ots_scale}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+    \def\svgwidth{7.7cm}
+    \input{img/ft_scale_acc.pdf_tex}
+    \caption{Fine tuning}
+    \label{results:img:ft_scale}
+    \end{subfigure}
+    \caption{Testing accuracy as datasets become smaller.}
+\end{figure*}
+
+\begin{figure}
+    \centering
+    \def\svgwidth{7.7cm}
+    \input{img/ots_vs_ft_type.pdf_tex}
+    \caption{Time/accuracy trade-offs for ViTs and CNNs either off the shelf or fine-tuned.}
+    \label{results:img:ots_vs_ft_type}
+\end{figure}
+
