@@ -1,12 +1,9 @@
 \section{Methods}
 
 % Experiments build upon Sabatelli et al.
-Most of the experiments and analysis discussed below build upon the work done in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}).
+Much of the experiments and analysis discussed below, builds upon the work done in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). This paper investigated TL properties of CNNs in the art classification domain. The main focus was on a comparison between CNN architectures pretrained on ImageNet1K when they were either used as OTS feature extractors, or fine-tuned to the new task. It was suggested that either approach was beneficial compared to training from scratch, but that FT resulted in substantially better performance than OTS TL.
 
 \subsection{Dataset}
-% Mention the challenges and show the table, of course. Also add max and min classes per category to the table maybe
-% Don't forget to tell that images get scaled and cropped to 224 * 224 size and imagenet normalised
-% Dataset described in more detail in Appendix A, including histograms and confusion matrices + balancing 'algorithm'
 
 \begin{table*}[tb]
 \centering
@@ -23,7 +20,23 @@ Scaling experiment & 7926 (77628) & 15 (801) & 0.300 (0.974) & - \\ \hline
 \label{methods:datasets}
 \end{table*}
 
+Similar to \citeauthor{sabatelli2018deep}, used models were pre-trained on ImageNet1K. Moreover, The Rijksmuseum Challenge dataset \citep{mensink14icmr} is used to extract the target tasks from. This dataset consists of a large collection of digitized artworks, together with xml-formatted metadata. The classification tasks distilled from it are: (1) \textit{Type classification}, containing labels as `painting', `sculpture', `drawing', etc.; (2) \textit{Material classification}, with labels as `paper', `porcelain', `silver', etc.; and finally, (3) `Artist classification', where the model has to predict who the creator is.
+
+The full dataset contains 112,039 images, and allows for multiple or zero labels per classification task. Different from \citeauthor{sabatelli2018deep}, only a fraction of the full set is used per task, as the research question concerns small datasets specifically. Samples are excluded from a task if they contain no labels for it. Samples containing more than one label are excluded as well, since analysis showed that in all cases this is true for only a small portion of the dataset.
+
+There are still many samples and classes left after doing the operations described above. Samples are also unevenly distributed among classes, with Gini-coefficients being as high as 0.98\footnote{The Gini-coefficient is a measure of balance, with 0 meaning all classes have the same number of samples, and 1 meaning all samples belong to a single class. A uniform distribution has coefficient $\frac{1}{3}$}. To counteract this, only the 30 most occurring classes are selected, and a cap of 1000 instances per class is enforced by taking a random sample when this limit is exceeded. Table \ref{methods:datasets} shows the result of these balancing operations. The situation prior is shown between brackets.
+
+For robustness, 5 subsets are randomly generated per classification task. These are then split up into 80\%, 10\%, 10\% training, validating and testing sets, respectively.
+
+Other than the tasks described above, table \ref{methods:datasets} shows an additional experiment called `Scaling'. The goal of this experiment is to see how the findings of this paper hold up as dataset sizes are shrunk further. It does this by taking the top 15 classes of type classification, and scaling it 4 times by a factor $\sqrt[4]{\frac{1}{10}} \approx 0.56$. The 5 datasets produced in this manner are then respectively 100\%, 56\%, 32\%, 18\% and 10\% the size of the dataset shown in table \ref{methods:datasets}. Steps are taken to ensure the distribution remains the same. Finally, 5 datasets are generated per scaling factor, leading to a total of 25 datasets. The same 80\%, 10\%, 10\% split is used for all.
+
+% Mention the challenges and show the table, of course. Also add max and min classes per category to the table maybe
+% Don't forget to tell that images get scaled and cropped to 224 * 224 size and imagenet normalised
+% Dataset described in more detail in Appendix A, including histograms and confusion matrices + balancing 'algorithm'
+
 \subsection{Models}
+In total, 8 different neural network architectures were selected for all experiments, of which 4 are CNN-based and 4 ViT-based.
+
 % General information (4 per type, base/tiny etc)
 % Paragraph/section about CNN models
 %  - ResNet50 and VGG19 best fine-tuned and ots networks in Sabatelli
@@ -33,5 +46,6 @@ Scaling experiment & 7926 (77628) & 15 (801) & 0.300 (0.974) & - \\ \hline
 
 \subsection{Hyperparameters}
 
+% Actually, mention resizing and imagenet scaling here. Its more of a hyper-param thing anyway :-p
 
 \subsection{Hardware and software}

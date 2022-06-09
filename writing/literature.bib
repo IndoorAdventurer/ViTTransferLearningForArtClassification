@@ -64,24 +64,6 @@
   year={2020}
 }
 
-% Paper that introduced the Swin Transformer
-@inproceedings{liu2021swin,
-  title={Swin transformer: Hierarchical vision transformer using shifted windows},
-  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
-  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
-  pages={10012--10022},
-  year={2021}
-}
-
-% Architecture that uses destillation methods to make ViTs work for small datasets
-@inproceedings{touvron2021training,
-  title={Training data-efficient image transformers \& distillation through attention},
-  author={Touvron, Hugo and Cord, Matthieu and Douze, Matthijs and Massa, Francisco and Sablayrolles, Alexandre and J{\'e}gou, Herv{\'e}},
-  booktitle={International Conference on Machine Learning},
-  pages={10347--10357},
-  year={2021},
-}
-
 %---CNNS----------------------------------------------------------------------
 % Paper that modern CNNs are attributed to
 @inproceedings{lecun1998gradient,
@@ -133,4 +115,69 @@
  url = {https://proceedings.neurips.cc/paper/2021/file/652cf38361a209088302ba2b8b7f51e0-Paper.pdf},
  volume = {34},
  year = {2021}
+}
+
+%---USED-ARCHITECTURES:-------------------------------------------------------
+% Don't forget ViT, but paper for that is of course already above (16x16 words)
+
+% Paper that introduced the Swin Transformer
+@inproceedings{liu2021swin,
+  title={Swin transformer: Hierarchical vision transformer using shifted windows},
+  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={10012--10022},
+  year={2021}
+}
+
+% Architecture that uses destillation methods to make ViTs work for small datasets (DeiT)
+@inproceedings{touvron2021training,
+  title={Training data-efficient image transformers \& distillation through attention},
+  author={Touvron, Hugo and Cord, Matthieu and Douze, Matthijs and Massa, Francisco and Sablayrolles, Alexandre and J{\'e}gou, Herv{\'e}},
+  booktitle={International Conference on Machine Learning},
+  pages={10347--10357},
+  year={2021},
+  volume =    {139},
+}
+
+% BeiT
+@inproceedings{bao2022beit,
+author = {Bao, Hangbo and Dong, Li and Piao, Songhao and Wei, Furu},
+title = {BEiT: BERT Pre-Training of Image Transformers},
+booktitle = {ICLR 2022},
+year = {2022},
+}
+
+% ResNet (50 in my case)
+@inproceedings{he2016deep,
+  title={Deep residual learning for image recognition},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={770--778},
+  year={2016}
+}
+
+% VGG (19 in my case)
+@article{simonyan2014very,
+  title={Very deep convolutional networks for large-scale image recognition},
+  author={Simonyan, Karen and Zisserman, Andrew},
+  journal={arXiv preprint arXiv:1409.1556},
+  year={2014}
+}
+
+% ConvNext
+@article{liu2022convnet,
+  title={A ConvNet for the 2020s},
+  author={Liu, Zhuang and Mao, Hanzi and Wu, Chao-Yuan and Feichtenhofer, Christoph and Darrell, Trevor and Xie, Saining},
+  journal={arXiv preprint arXiv:2201.03545},
+  year={2022}
+}
+
+% EfficientnetV2
+@inproceedings{tan2021efficientnetv2,
+  title={Efficientnetv2: Smaller models and faster training},
+  author={Tan, Mingxing and Le, Quoc},
+  booktitle={International Conference on Machine Learning},
+  pages={10096--10106},
+  year={2021},
+  organization={PMLR}
 }
