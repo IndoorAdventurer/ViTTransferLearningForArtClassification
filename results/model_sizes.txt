@@ -1,0 +1,9 @@
+VGG19: 143,667,240
+ResNet50: 25,557,032
+ConvNext: 88,591,464
+EfficientNet: 13,649,388
+
+ViT: 86,567,656
+Swin: 87,768,224
+DeiT: 86,567,656
+BeiT: Ook zoiets

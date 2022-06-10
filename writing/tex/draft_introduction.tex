@@ -92,7 +92,7 @@ A different TL technique is called \textit{off-the-shelf} (OTS) TL. It is simila
 % 1) "yosinski2014transferable": OTS can prevent overfitting where fine-tuning would overfit
 % 2) "yosinski2014transferable": first layers general information
 
-\subsection{Related work and the current study}
+\subsection{Related work and the current study} \label{related_work}
 As mentioned, the paper that first introduced ViTs already demonstrated they benefit from TL \citep{dosovitskiy2020image}, and more has been discovered about ViTs' TL properties since then. \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}) investigated whether TL allowed ViTs to replace CNNs in Medical Imaging. This domain is characterized by small datasets, so to overcome the inductive bias problem described earlier, TL is imperative. It was found that ViTs benefit more from FT TL than CNNs do, and that ViTs pre-trained on ImageNet perform on par CNNs.
 
 What \citeauthor{matsoukas2021time} did not investigate, is OTS performance of ViTs. This was, however, done in \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}), which found that ViTs pre-trained on ImageNet had worse OTS performance than their CNN counterparts. An exception was the \textit{Swin-B} architecture, which was the best performing model on all datasets, and uses \textit{(shifted-)window-based} self-attention methods, to make Transformers better suited for CV tasks \citep{liu2021swin}.
