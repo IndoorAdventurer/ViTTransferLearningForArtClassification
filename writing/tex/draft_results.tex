@@ -1,6 +1,13 @@
 \section{Results}
 
-% Tell that std (+/- s) is reported in all tables, while standard error of the mean (+/- s / sqrt(N) with N=5) is plotted as a shaded area in all graphs
+This section presents results of the conducted experiments, mostly in the form of tables and line plots. Tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) between brackets. A green shaded cell marks best performance, while yellow and red depict second best and worst performance, respectively.
+
+Line plots show average validation accuracy (dashed line is CNN-based, continuous is ViT-based), with \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$) depicted as a shaded region. Plots end when an early stop occurred for the first of 5 trials.
+
+% Tell that the appendix shows all other plots as well maybe. Only for the BP paper tho.
+
+
+\subsection{Off the shelf learning}
 
 \begin{figure*}
     \centering
@@ -25,6 +32,7 @@
     \label{results:img:ots_artist}
     \end{subfigure}
     \caption{Validation accuracy using off the shelf models.}
+    \label{results:img:ots}
 \end{figure*}
 
 \begin{table}[]
@@ -87,6 +95,24 @@
 \end{table}
 
 
+Tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show performance of OTS trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracy per epoch. Performance on the testing set is comparable on all tasks in terms of ranking. Other observations are consistent as well, such as ConvNext taking the longest to converge.
+
+Swin is coming out on top in all cases, which is in line with results of \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). What slightly deviates from these result, is the observation that ViT performs better than a ResNet-based model on 2 out of 3 tasks. This comparison is, however, not very meaningful, as \citeauthor{zhou2021convnets} uses ResNet101 and 152 instead of ResNet50.
+
+It is interesting that VGG19 performs worse than ResNet50, as it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). This discrepancy is likely attributable to the difference in dataset size, as VGG19 is by far the largest model (see section \ref{methods:models}), and likely too large for such small datasets.
+
+When comparing the tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. This seems counterintuitive, as one would think artist identification is much more challenging than determining if something is a painting, or if it is made out of paper instead of wood. An explanation can likely be found in table \ref{methods:datasets}, which shows that material and artist classification sets are the least and most balanced, respectively. In addition, tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show that balanced accuracies are up to 14\% lower than plain ones for material classification, while they are much closer for artist classification. This suggests much accuracy is lost by misclassifying instances of less occurring classes in favor of more occurring ones. Similar finding can be done for FT results in section \ref{results:ft}.
+% Maybe switch this to discussion tho ^
+
+%OTS TL:
+%    Comparisons with Sabatelli paper (ResNet50 vs VGG19)
+%    ViTs slightly better
+%    Lower balanced accuracy
+%    Higher balanced accuracy for type classification and even more for artist
+%    Artist higherst, which is surprising since it is the most difficult intuitively
+
+\subsection{Fine-tuning} \label{results:ft}
+
 \begin{figure*}
     \centering
     \begin{subfigure}{0.32\textwidth}
@@ -110,6 +136,7 @@
     \label{results:img:ft_artist}
     \end{subfigure}
     \caption{Validation accuracy using fine-tuned models.}
+    \label{results:img:ft}
 \end{figure*}
 
 
@@ -173,6 +200,8 @@
 \end{table}
 
 
+\subsection{Scaling dataset size}
+
 \begin{figure*}
     \centering
     \begin{subfigure}{0.45\textwidth}
@@ -191,6 +220,11 @@
     \caption{Testing accuracy as datasets become smaller.}
 \end{figure*}
 
+
+
+\subsection{Off the shelf learning versus fine-tuning}
+
+
 \begin{figure}
     \centering
     \def\svgwidth{7.7cm}
@@ -199,3 +233,6 @@
     \label{results:img:ots_vs_ft_type}
 \end{figure}
 
+
+\subsection{Qualitative analysis}
+TODO
