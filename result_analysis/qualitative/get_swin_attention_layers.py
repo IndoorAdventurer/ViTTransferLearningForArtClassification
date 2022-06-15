@@ -54,7 +54,7 @@ with open(args.target + "_prediction.txt", "w") as f:
 
 
 #---CHANGING-ATTENTION-WEIGHTS-TO-VIT-STYLE:---------------------------------------
-def meanAttentionPerLayerTest(att_mat, shift=0):  
+def meanAttentionPerLayer(att_mat, shift=0):  
     # Keeping the dimension in case I want to do something with it later:
     m = np.mean(att_mat, axis=1, keepdims=True)
 
@@ -88,11 +88,11 @@ def meanAttentionPerLayerTest(att_mat, shift=0):
     m = m.reshape(s[0], sqrt_frm, sqrt_frm, s[2], s[3])
 
     # Expanding it such that it is the same size as the final one
-    if repeats > 1:
-        m = m.repeat(repeats=repeats, axis=1)
-        m = m.repeat(repeats=repeats, axis=2)
-        m = m.repeat(repeats=repeats, axis=3)
-        m = m.repeat(repeats=repeats, axis=4)
+    # if repeats > 1:
+    #     m = m.repeat(repeats=repeats, axis=1)     REMOVED THIS BECAUSE
+    #     m = m.repeat(repeats=repeats, axis=2)     I AM NO LONGER DOING
+    #     m = m.repeat(repeats=repeats, axis=3)     ATTENTION ROLLOUT
+    #     m = m.repeat(repeats=repeats, axis=4)     FOR SWIN! GRADCAM INSTEAD
 
     # Change the shape to how it works for ViTs as well
     s = m.shape
@@ -105,7 +105,7 @@ def meanAttentionPerLayerTest(att_mat, shift=0):
 print("Processing layers", flush=True)
 with open(args.target + "_layers.npy", "wb") as f:
     for idx, layer in enumerate(att_weighs):
-        A = meanAttentionPerLayerTest(layer, shift= 3 * int(idx % 2))
+        A = meanAttentionPerLayer(layer, shift= 3 * int(idx % 2))
         np.save(f, A)
         print(".", end="", flush=True)
 
