@@ -1,9 +1,9 @@
 \section{Methods}
 
 % Experiments build upon Sabatelli et al.
-Much of the experiments and analysis discussed below, builds upon the work done in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). This paper investigated TL properties of CNNs in the art classification domain. The main focus was on a comparison between CNN architectures pretrained on ImageNet1K when they were either used as OTS feature extractors, or fine-tuned to the new task. It was suggested that FT resulted in substantially better performance than training from scratch or OTS TL.
+Much of the experiments and analysis discussed below, builds upon the work done in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). This paper investigated TL properties of CNNs in the art classification domain. The main focus was on a comparison between CNN architectures pretrained on ImageNet1K when they were either used as OTS feature extractors, or fine-tuned to the new task. It was suggested that FT resulted in substantially better performance than either training from scratch or OTS TL.
 
-\subsection{Dataset}
+\subsection{Dataset} \label{methods:dataset}
 
 \begin{table*}[tb]
 \centering
@@ -39,8 +39,8 @@ Eight different neural network architectures are used throughout this paper, of 
 
 To start off with CNNs, ResNet50 \citep{he2016deep} and VGG19 \citep{simonyan2014very} are chosen, as these were the best performing models in \citeauthor{sabatelli2018deep} for respectively FT and OTS TL. In addition, \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}) used ResNet50 too, while \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}) used ResNet101 and ResNet152. To also add some more recent CNNs, ConvNext \citep{liu2022convnet} -- a purely CNN-based model inspired by ViTs' recent success -- and EfficientNetV2 \citep{tan2021efficientnetv2} are included as well.
 
-For ViTs, versions with a 16x16 patch size are chosen. The first model is the original ViT \citep{dosovitskiy2020image}. Swin \citep{liu2021swin}, which was mentioned in section \ref{related_work}, is also selected, as it showed promising performance in \citeauthor{zhou2021convnets}. DeiT \citep{touvron2021training}, the distillation based architecture, was also mentioned in section \ref{related_work}. The small version of this architecture was used in \citeauthor{matsoukas2021time}, as it is similar in size to ResNet50, to which it was compared. Here, however, also a base-sized version is chosen. Specifically, the version that does not include output for distillation learning.
-% TODO if you do end up using distilation with ConvNext as a teacher: don't forget to change this section!!!
+For ViTs, versions with a 16x16 patch size are chosen. The first model is the original ViT \citep{dosovitskiy2020image}. Swin \citep{liu2021swin}, which was mentioned in section \ref{related_work}, is also selected, as it showed promising performance in \citeauthor{zhou2021convnets}. Section \ref{related_work} mentioned DeiT \citep{touvron2021training} too, as the distillation based architecture. The small version of this architecture was used in \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}), since it is similar in size to ResNet50, to which it was compared. Here, however, a base-sized version is chosen. Specifically, the version that does not include output for distillation learning.
+% TODO if you do end up using distilation with ConvNext as a teacher: don't forget to change this section!!! TODO 2: im not completely happy with the part about DeiT. Doesn't flow super nicely
 
 All ViT-based models have a bit over 86 million parameters. ConvNext is of similar size, with 88.6 million parameters. ResNet50 and EfficientNetV2 are smaller, with 25.6 and 13.6 million, respectively, while VGG19 is the largest model, with 143.7 million parameters. It should be mentioned that for both OTS TL and FT, preliminary experiments were performed with `small' and `tiny' models. The results of these suggested that similar conclusions could have been drawn if these were used instead.
 

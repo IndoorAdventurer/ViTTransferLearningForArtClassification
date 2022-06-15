@@ -2,12 +2,12 @@
 
 This section presents results of the conducted experiments, mostly in the form of tables and line plots. Tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) between brackets. A green shaded cell marks best performance, while yellow and red depict second best and worst performance, respectively.
 
-Line plots show average validation accuracy (dashed line is CNN-based, continuous is ViT-based), with \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$) depicted as a shaded region. Plots end when an early stop occurred for the first of 5 trials.
+Line plots mostly show average validation accuracy (dashed line is CNN-based, continuous is ViT-based), with \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$) depicted as a shaded region. Plots end when an early stop occurred for the first of 5 trials.
 
 % Tell that the appendix shows all other plots as well maybe. Only for the BP paper tho.
 
 
-\subsection{Off the shelf learning}
+\subsection{Off the shelf learning} \label{results:ots}
 
 \begin{figure*}
     \centering
@@ -95,13 +95,17 @@ Line plots show average validation accuracy (dashed line is CNN-based, continuou
 \end{table}
 
 
-Tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show performance of OTS trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracy per epoch. Performance on the testing set is comparable on all tasks in terms of ranking. Other observations are consistent as well, such as ConvNext taking the longest to converge.
+Tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show testing performance of OTS trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracies. Performance on the testing set is comparable among all tasks in terms of ranking. Other observations are consistent as well, such as ConvNext taking the longest to converge.
 
-Swin is coming out on top in all cases, which is in line with results of \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). What slightly deviates from these result, is the observation that ViT performs better than a ResNet-based model on 2 out of 3 tasks. This comparison is, however, not very meaningful, as \citeauthor{zhou2021convnets} uses ResNet101 and 152 instead of ResNet50.
+Swin is coming out on top in all cases, which is in line with results of \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). What slightly deviates from these result, is the observation that ViT performs better than a ResNet-based model (on 2 out of 3 tasks). This comparison is, however, not meaningful, as \citeauthor{zhou2021convnets} uses ResNet101 and 152. Using these models instead, gives 86.21\% ($\pm$ 0.70\%) accuracy for ResNet101, and 86.19\% ($\pm$ 0.60\%) for ResNet152, which is indeed slightly higher than ViT's 86.06\% shown in table \ref{results:tab:ots_type}.
 
-It is interesting that VGG19 performs worse than ResNet50, as it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). This discrepancy is likely attributable to the difference in dataset size, as VGG19 is by far the largest model (see section \ref{methods:models}), and likely too large for such small datasets.
+It is interesting that VGG19 performs worse than ResNet50, since it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). The current study uses smaller datasets and fewer classes. The difference might be attributable to this, as VGG19 is the largest model (see section \ref{methods:models}), and has the largest final layer -- with 4096 inputs.
 
-When comparing the tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. This seems counterintuitive, as one would think artist identification is much more challenging than determining if something is a painting, or if it is made out of paper instead of wood. An explanation can likely be found in table \ref{methods:datasets}, which shows that material and artist classification sets are the least and most balanced, respectively. In addition, tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show that balanced accuracies are up to 14\% lower than plain ones for material classification, while they are much closer for artist classification. This suggests much accuracy is lost by misclassifying instances of less occurring classes in favor of more occurring ones. Similar finding can be done for FT results in section \ref{results:ft}.
+When comparing tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. In addition, the difference between balanced and plain accuracy is the largest for material classification (up to 14\% on the testing set), while it is the smallest for artist classification (at most 4.7\%). Gini-coefficients in table \ref{methods:datasets} show the same trend, with material classification being the least balanced, and artist classification the most.
+
+As a whole, ViTs are doing well for the OTS experiments. Especially Swin and DeiT are ranked high on all testing sets, while ConvNext is the most promising CNN-based architecture. Taking the mean accuracy of all ViT- and CNN-based models, reveals that ViTs as a group perform slightly better. On type classification, for example, their mean accuracy is 86.5\%, while it is 85.5\% for CNNs.
+
+% This seems counterintuitive, as one would think artist identification is much more challenging than determining if something is a painting, or if it is made out of paper instead of wood. An explanation can likely be found in table \ref{methods:datasets}, which shows that material and artist classification sets are the least and most balanced, respectively. In addition, tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show that balanced accuracies are up to 14\% lower than plain ones for material classification, while they are much closer for artist classification. This suggests much accuracy is lost by misclassifying instances of less occurring classes in favor of more occurring ones. Similar finding can be done for FT results in section \ref{results:ft}.
 % Maybe switch this to discussion tho ^
 
 %OTS TL:
@@ -200,6 +204,18 @@ When comparing the tasks to one another, it can be observed that overall accurac
 \end{table}
 
 
+Once again, tables \ref{results:tab:ft_type} through \ref{results:tab:ft_artist} show testing performance, while figure \ref{results:img:ft} shows corresponding validation accuracies.
+
+Similar to OTS TL, findings are somewhat consistent across classification tasks, while overall performance is again lowest for material classification, and highest for artist classification. Swin is still dominant in terms of testing accuracy, but Conv\-Next is catching up. This is especially true for balanced accuracy, where it tops the ranking on 2 of the 3 tasks. More general, it looks as if the advantage ViTs seemed to have for OTS TL is gone. Mean accuracy of ViTs grouped together is, for example, 91.2\% on type classification, while it is 91.3\% for CNNs.
+
+Different from \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}), ResNet50 performs slightly better than DeiT. This remains true when using the same `tiny' version of DeiT as that paper used. On type classification, for example, it gets 90.44\% ($\pm$ 0.93\%) accuracy, whereas ResNet50 shows 91.78\% in table \ref{results:tab:ft_type}.
+
+FT results also seem to be less favourable for ViTs compared to \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). ViT consistently falls behind ResNet50, and even shows the worst accuracy in table \ref{results:tab:ft_type} (90.11\%). It should be mentioned that ResNet101 and 152  -- which were used in \citeauthor{zhou2021convnets} --  show performance similar to ResNet50, with type classification accuracies of 91.96\% ($\pm$ 0.59\%) and 91.94\% ($\pm$ 0.25), respectively.
+
+The performance difference between best and worst models is much smaller compared to OTS TL. There it was between 7.2\% and 11.8\%, while here it is at most 3.8\%. In addition, the worst FT model is often better than the best OTS model. The only exception is material classification, where the worst FT model (BeiT) has accuracy 85.74\%, and the best OTS one (Swin) has 85.87\%.
+
+VGG19 has dropped further in the rankings, and now shows the worst balanced accuracy for type classification. ResNet50, on the other hand, appears to flourish with FT, often even beating ConvNext in the rankings. This is consistent with \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), where it was the best FT model overall.
+
 \subsection{Scaling dataset size}
 
 \begin{figure*}
@@ -218,12 +234,14 @@ When comparing the tasks to one another, it can be observed that overall accurac
     \label{results:img:ft_scale}
     \end{subfigure}
     \caption{Testing accuracy as datasets become smaller.}
+    \label{results:img:scale}
 \end{figure*}
 
+Figure \ref{results:img:scale} shows how testing accuracy decreases when smaller portions of the full dataset are taken (see section \ref{methods:dataset}). The x-axes show a logarithmic scale, with the rightmost value being roughly 10\% the size of the leftmost one.
 
+For both OTS TL in figure \ref{results:img:ots_scale}, as FT TL in figure \ref{results:img:ft_scale}, findings done in sections \ref{results:ots} and \ref{results:ft} seem to hold up as dataset sizes are shrunk. When going from largest to smallest dataset, the mean accuracy of all models taken together drops with 9.1\% for OTS TL. For FT this is 9.2\%, which is very similar.
 
 \subsection{Off the shelf learning versus fine-tuning}
-
 
 \begin{figure}
     \centering
@@ -233,6 +251,10 @@ When comparing the tasks to one another, it can be observed that overall accurac
     \label{results:img:ots_vs_ft_type}
 \end{figure}
 
+
+Figure \ref{results:img:ots_vs_ft_type} shows type classification accuracy as reported in tables \ref{results:tab:ots_type} and \ref{results:tab:ft_type}. These are plotted against average epoch duration, as to get a sense of time/accuracy trade-offs. Colours make it easy to distinguish ViTs from CNNs, and OTS models from FT ones.
+
+OTS ViTs all take roughly the same time per epoch. CNNs are generally faster here, but accuracy also clearly falls behind for all but one (ConvNext). For FT, accuracies seem on-par, while CNNs still take much shorter to train. One CNN (ResNet50) even is faster than any OTS ViT, while also showing better accuracy. In short, FT CNNs have a better time/accuracy trade-off, while it is a FT ViT (Swin) that achieves the best accuracy overall.
 
 \subsection{Qualitative analysis}
 TODO
