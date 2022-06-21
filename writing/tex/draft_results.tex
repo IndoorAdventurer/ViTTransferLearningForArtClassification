@@ -35,7 +35,7 @@ Line plots mostly show average validation accuracy (dashed line is CNN-based, co
     \label{results:img:ots}
 \end{figure*}
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -55,7 +55,7 @@ Line plots mostly show average validation accuracy (dashed line is CNN-based, co
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -75,7 +75,7 @@ Line plots mostly show average validation accuracy (dashed line is CNN-based, co
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -101,7 +101,7 @@ Swin is coming out on top in all cases, which is in line with results of \citeau
 
 It is interesting that VGG19 performs worse than ResNet50, since it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). The current study uses smaller datasets and fewer classes. The difference might be attributable to this, as VGG19 is the largest model (see section \ref{methods:models}), and has the largest final layer -- with 4096 inputs.
 
-When comparing tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. In addition, the difference between balanced and plain accuracy is the largest for material classification (up to 14\% on the testing set), while it is the smallest for artist classification (at most 4.7\%). Gini-coefficients in table \ref{methods:datasets} show the same trend, with material classification being the least balanced, and artist classification the most.
+When comparing tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. In addition, the difference between balanced and plain accuracy is the largest for material classification (up to 14\% on the testing set), while it is the smallest for artist classification (at most 4.7\%). Note that Gini-coefficients in table \ref{methods:datasets} show the same trend, with material classification being the least balanced, and artist classification the most.
 
 As a whole, ViTs are doing well for the OTS experiments. Especially Swin and DeiT are ranked high on all testing sets, while ConvNext is the most promising CNN-based architecture. Taking the mean accuracy of all ViT- and CNN-based models, reveals that ViTs as a group perform slightly better. On type classification, for example, their mean accuracy is 86.5\%, while it is 85.5\% for CNNs.
 
@@ -144,7 +144,7 @@ As a whole, ViTs are doing well for the OTS experiments. Especially Swin and Dei
 \end{figure*}
 
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -164,7 +164,7 @@ As a whole, ViTs are doing well for the OTS experiments. Especially Swin and Dei
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -184,7 +184,7 @@ As a whole, ViTs are doing well for the OTS experiments. Especially Swin and Dei
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[tb]
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \hline
@@ -210,7 +210,7 @@ Similar to OTS TL, findings are somewhat consistent across classification tasks,
 
 Different from \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}), ResNet50 performs slightly better than DeiT. This remains true when using the same `tiny' version of DeiT as that paper used. On type classification, for example, it gets 90.44\% ($\pm$ 0.93\%) accuracy, whereas ResNet50 shows 91.78\% in table \ref{results:tab:ft_type}.
 
-FT results also seem to be less favourable for ViTs compared to \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). ViT consistently falls behind ResNet50, and even shows the worst accuracy in table \ref{results:tab:ft_type} (90.11\%). It should be mentioned that ResNet101 and 152  -- which were used in \citeauthor{zhou2021convnets} --  show performance similar to ResNet50, with type classification accuracies of 91.96\% ($\pm$ 0.59\%) and 91.94\% ($\pm$ 0.25), respectively.
+FT results also seem to be less favourable for ViTs compared to \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). ViT consistently falls behind ResNet50, and even shows the worst accuracy in table \ref{results:tab:ft_type} (90.11\%). It should be mentioned that ResNet101 and 152  -- which were used alongside ViT in \citeauthor{zhou2021convnets} --  show performance similar to ResNet50, with type classification accuracies of 91.96\% ($\pm$ 0.59\%) and 91.94\% ($\pm$ 0.25), respectively.
 
 The performance difference between best and worst models is much smaller compared to OTS TL. There it was between 7.2\% and 11.8\%, while here it is at most 3.8\%. In addition, the worst FT model is often better than the best OTS model. The only exception is material classification, where the worst FT model (BeiT) has accuracy 85.74\%, and the best OTS one (Swin) has 85.87\%.
 
@@ -257,4 +257,24 @@ Figure \ref{results:img:ots_vs_ft_type} shows type classification accuracy as re
 OTS ViTs all take roughly the same time per epoch. CNNs are generally faster here, but accuracy also clearly falls behind for all but one (ConvNext). For FT, accuracies seem on-par, while CNNs still take much shorter to train. One CNN (ResNet50) even is faster than any OTS ViT, while also showing better accuracy. In short, FT CNNs have better time/accuracy trade-offs, while it is a FT ViT (Swin) that achieves the best accuracy overall.
 
 \subsection{Qualitative analysis}
-TODO
+
+\begin{figure*}[tb]
+    \includegraphics[width=\textwidth]{img/layers.png}
+    \caption{Attention layers of successively deeper transformer blocks.}
+    \label{results:img:layers}
+\end{figure*}
+
+\begin{figure*}[tb]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=8cm]{img/img005_salience.png}
+    \caption{Dish}
+    \label{results:img:sal:dish}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+    \includegraphics[width=8cm]{img/img011_salience.png}
+    \caption{Picture}
+    \label{results:img:sal:dish}
+    \end{subfigure}
+    \caption{Examples of saliency maps for different models.}
+\end{figure*}
