@@ -1,0 +1,42 @@
+\documentclass{beamer}
+
+% Style:
+\usepackage{fontspec}
+\setsansfont{Candara}
+\usetheme{Rochester}
+\definecolor{primarycolor}{RGB}{15,20,40}
+\usecolortheme[named=primarycolor]{structure}
+\setbeamercolor{normal text}{fg=primarycolor}
+
+
+\title{\textsc{\bfseries Transfer Learning with\\Vision Transformers}}
+\author{\textbf{Vincent} Tonkes}
+\institute{\textbf{University} of Groningen}
+\date{}
+
+% Also makes it bold and small caps
+\newcommand{\createtitle}[1]{\frametitle{\textsc{\bfseries#1}}}
+
+\begin{document}
+
+{
+\setbeamercolor*{frametitle}{bg=white}
+\frame{
+\titlepage
+{\tiny Supervised by:}\\\small\textbf{Matthia} Sabatelli\tiny, PhD
+}
+}
+
+% Leaves them out on slide two and highlights them on slide 3
+\newcommand{\toexplain}[1]{
+    \textcolor<2>{white}{\textcolor<3>{red}{#1}}
+}
+
+\begin{frame}
+\createtitle{Research Question}
+\begin{center}
+\textbf{\large ``\textit{To what extent (and in what manners) does utilizing \toexplain{Transfer Learning} allow \toexplain{Vision Transformers} to perform on par with \toexplain{Convolutional Neural Networks} on common \toexplain{art classification problems}, when compute resources are limited to a single \toexplain{GPU}?}''}
+\end{center}
+\end{frame}
+
+\end{document}
