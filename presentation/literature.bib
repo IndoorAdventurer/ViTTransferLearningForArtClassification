@@ -1,0 +1,183 @@
+%---DATASET-------------------------------------------------------------------
+% Describes the dataset that I am using:
+@inproceedings{mensink14icmr,
+  author = {Thomas Mensink and Jan van Gemert},
+  title = {The Rijksmuseum Challenge: Museum-Centered Visual Recognition},
+  booktitle = {ACM International Conference on Multimedia Retrieval (ICMR)},
+  year = {2014}
+}
+
+%---TRANSFER-LEARNING---------------------------------------------------------
+% PHD Thesis of Sabatelli:
+@phdthesis{sabatelli2022contributions,
+  title={Contributions to Deep Transfer Learning: from Supervised to Reinforcement Learning},
+  author={Sabatelli, Matthia},
+  year={2022},
+  school={Universit\`e de Lieg\`e, Lieg\`e, Belgique}
+}
+
+% The paper by Sabatelli that I will `replicate':
+@inproceedings{sabatelli2018deep,
+  title={Deep transfer learning for art classification problems},
+  author={Sabatelli, Matthia and Kestemont, Mike and Daelemans, Walter and Geurts, Pierre},
+  booktitle={Proceedings of the European Conference on Computer Vision (ECCV) Workshops},
+  year={2018}
+}
+
+% Paper from long ago that found off-the-shelf performance of CNN was better
+% than from-scratch performance of non-CNN models:
+@inproceedings{sharif2014cnn,
+  title={CNN features off-the-shelf: an astounding baseline for recognition},
+  author={Sharif Razavian, Ali and Azizpour, Hossein and Sullivan, Josephine and Carlsson, Stefan},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition workshops},
+  pages={806--813},
+  year={2014}
+}
+
+% Paper that did lots of qualitative experiments w.r.t. CNNs transfer learning
+% abilities:
+@inproceedings{yosinski2014transferable,
+ author = {Yosinski, Jason and Clune, Jeff and Bengio, Yoshua and Lipson, Hod},
+ booktitle = {Advances in Neural Information Processing Systems},
+ publisher = {Curran Associates, Inc.},
+ title = {How transferable are features in deep neural networks?},
+ volume = {27},
+ year = {2014}
+}
+
+%---VITS----------------------------------------------------------------------
+% Paper that introduced Transformers:
+@inproceedings{vaswani2017attention,
+ author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+ booktitle = {Advances in Neural Information Processing Systems},
+ publisher = {Curran Associates, Inc.},
+ title = {Attention is All you Need},
+ volume = {30},
+ year = {2017}
+}
+
+% Paper that introduced ViTs:
+@article{dosovitskiy2020image,
+  title={An image is worth 16x16 words: Transformers for image recognition at scale},
+  author={Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and others},
+  journal={arXiv preprint arXiv:2010.11929},
+  year={2020}
+}
+
+%---CNNS----------------------------------------------------------------------
+% Paper that modern CNNs are attributed to
+@inproceedings{lecun1998gradient,
+  title={Gradient-based learning applied to document recognition},
+  booktitle={Proceedings of the IEEE},
+  volume={86},
+  number={11},
+  pages={2278--2324},
+  author={LeCun, Yann and Bottou, L{\'e}on and Bengio, Yoshua and Haffner, Patrick},
+  year={1998},
+}
+
+% AlexNet paper: start of CNN dominance
+@inproceedings{krizhevsky2012imagened,
+ author = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
+ booktitle = {Advances in Neural Information Processing Systems},
+ publisher = {Curran Associates, Inc.},
+ title = {ImageNet Classification with Deep Convolutional Neural Networks},
+ volume = {25},
+ year = {2012}
+}
+
+%---TRANSFER-LEARNING-WITH-VITS-----------------------------------------------
+% Most interesting paper in the category:
+@article{matsoukas2021time,
+  title={Is it time to replace cnns with transformers for medical images?},
+  author={Matsoukas, Christos and Haslum, Johan Fredin and S{\"o}derberg, Magnus and Smith, Kevin},
+  journal={arXiv preprint arXiv:2108.09038},
+  year={2021}
+}
+
+% Says interesting stuff about off-the-shelf performance of ViTs
+@inproceedings{zhou2021convnets,
+  title={ConvNets vs. Transformers: Whose Visual Representations are More Transferable?},
+  author={Zhou, Hong-Yu and Lu, Chixiang and Yang, Sibei and Yu, Yizhou},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={2230--2238},
+  year={2021}
+}
+
+% This one did much qualitative analysis on ViTs FIXME don't think i'll use this one
+@inproceedings{raghu2021vision,
+ author = {Raghu, Maithra and Unterthiner, Thomas and Kornblith, Simon and Zhang, Chiyuan and Dosovitskiy, Alexey},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {M. Ranzato and A. Beygelzimer and Y. Dauphin and P.S. Liang and J. Wortman Vaughan},
+ pages = {12116--12128},
+ publisher = {Curran Associates, Inc.},
+ title = {Do Vision Transformers See Like Convolutional Neural Networks?},
+ url = {https://proceedings.neurips.cc/paper/2021/file/652cf38361a209088302ba2b8b7f51e0-Paper.pdf},
+ volume = {34},
+ year = {2021}
+}
+
+%---USED-ARCHITECTURES:-------------------------------------------------------
+% Don't forget ViT, but paper for that is of course already above (16x16 words)
+
+% Paper that introduced the Swin Transformer
+@inproceedings{liu2021swin,
+  title={Swin transformer: Hierarchical vision transformer using shifted windows},
+  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={10012--10022},
+  year={2021}
+}
+
+% Architecture that uses destillation methods to make ViTs work for small datasets (DeiT)
+@inproceedings{touvron2021training,
+  title={Training data-efficient image transformers \& distillation through attention},
+  author={Touvron, Hugo and Cord, Matthieu and Douze, Matthijs and Massa, Francisco and Sablayrolles, Alexandre and J{\'e}gou, Herv{\'e}},
+  booktitle={International Conference on Machine Learning},
+  pages={10347--10357},
+  year={2021},
+  volume =    {139},
+}
+
+% BeiT
+@inproceedings{bao2022beit,
+author = {Bao, Hangbo and Dong, Li and Piao, Songhao and Wei, Furu},
+title = {BEiT: BERT Pre-Training of Image Transformers},
+booktitle = {ICLR 2022},
+year = {2022},
+}
+
+% ResNet (50 in my case)
+@inproceedings{he2016deep,
+  title={Deep residual learning for image recognition},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={770--778},
+  year={2016}
+}
+
+% VGG (19 in my case)
+@article{simonyan2014very,
+  title={Very deep convolutional networks for large-scale image recognition},
+  author={Simonyan, Karen and Zisserman, Andrew},
+  journal={arXiv preprint arXiv:1409.1556},
+  year={2014}
+}
+
+% ConvNext
+@article{liu2022convnet,
+  title={A ConvNet for the 2020s},
+  author={Liu, Zhuang and Mao, Hanzi and Wu, Chao-Yuan and Feichtenhofer, Christoph and Darrell, Trevor and Xie, Saining},
+  journal={arXiv preprint arXiv:2201.03545},
+  year={2022}
+}
+
+% EfficientnetV2
+@inproceedings{tan2021efficientnetv2,
+  title={Efficientnetv2: Smaller models and faster training},
+  author={Tan, Mingxing and Le, Quoc},
+  booktitle={International Conference on Machine Learning},
+  pages={10096--10106},
+  year={2021},
+  organization={PMLR}
+}

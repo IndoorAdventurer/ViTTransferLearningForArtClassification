@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: presentation.aux
+The style file: acm.bst
+Database file #1: literature.bib
+Warning--can't use both volume and number fields in lecun1998gradient
+You've used 11 entries,
+            2253 wiz_defined-function locations,
+            588 strings with 6205 characters,
+and the built_in function-call counts, 5156 in all, are:
+= -- 472
+> -- 307
+< -- 0
++ -- 128
+- -- 114
+* -- 400
+:= -- 797
+add.period$ -- 33
+call.type$ -- 11
+change.case$ -- 89
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 206
+empty$ -- 376
+format.name$ -- 114
+if$ -- 1089
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 11
+newline$ -- 58
+num.names$ -- 22
+pop$ -- 115
+preamble$ -- 1
+purify$ -- 78
+quote$ -- 0
+skip$ -- 155
+stack$ -- 0
+substring$ -- 274
+swap$ -- 77
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 44
+warning$ -- 1
+while$ -- 37
+width$ -- 13
+write$ -- 111
+(There was 1 warning)

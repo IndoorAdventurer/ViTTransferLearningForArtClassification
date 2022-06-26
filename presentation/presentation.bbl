@@ -1,0 +1,71 @@
+\begin{thebibliography}{10}
+
+\bibitem{bao2022beit}
+{\sc Bao, H., Dong, L., Piao, S., and Wei, F.}
+\newblock Beit: Bert pre-training of image transformers.
+\newblock In {\em ICLR 2022\/} (2022).
+
+\bibitem{dosovitskiy2020image}
+{\sc Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X.,
+  Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., et~al.}
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock {\em arXiv preprint arXiv:2010.11929\/} (2020).
+
+\bibitem{he2016deep}
+{\sc He, K., Zhang, X., Ren, S., and Sun, J.}
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition\/} (2016), pp.~770--778.
+
+\bibitem{lecun1998gradient}
+{\sc LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P.}
+\newblock Gradient-based learning applied to document recognition.
+\newblock In {\em Proceedings of the IEEE\/} (1998), vol.~86, pp.~2278--2324.
+
+\bibitem{liu2021swin}
+{\sc Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., and Guo,
+  B.}
+\newblock Swin transformer: Hierarchical vision transformer using shifted
+  windows.
+\newblock In {\em Proceedings of the IEEE/CVF International Conference on
+  Computer Vision\/} (2021), pp.~10012--10022.
+
+\bibitem{liu2022convnet}
+{\sc Liu, Z., Mao, H., Wu, C.-Y., Feichtenhofer, C., Darrell, T., and Xie, S.}
+\newblock A convnet for the 2020s.
+\newblock {\em arXiv preprint arXiv:2201.03545\/} (2022).
+
+\bibitem{mensink14icmr}
+{\sc Mensink, T., and van Gemert, J.}
+\newblock The rijksmuseum challenge: Museum-centered visual recognition.
+\newblock In {\em ACM International Conference on Multimedia Retrieval
+  (ICMR)\/} (2014).
+
+\bibitem{simonyan2014very}
+{\sc Simonyan, K., and Zisserman, A.}
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em arXiv preprint arXiv:1409.1556\/} (2014).
+
+\bibitem{tan2021efficientnetv2}
+{\sc Tan, M., and Le, Q.}
+\newblock Efficientnetv2: Smaller models and faster training.
+\newblock In {\em International Conference on Machine Learning\/} (2021), PMLR,
+  pp.~10096--10106.
+
+\bibitem{touvron2021training}
+{\sc Touvron, H., Cord, M., Douze, M., Massa, F., Sablayrolles, A., and
+  J{\'e}gou, H.}
+\newblock Training data-efficient image transformers \& distillation through
+  attention.
+\newblock In {\em International Conference on Machine Learning\/} (2021),
+  vol.~139, pp.~10347--10357.
+
+\bibitem{vaswani2017attention}
+{\sc Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez,
+  A.~N., Kaiser, {\L}., and Polosukhin, I.}
+\newblock Attention is all you need.
+\newblock In {\em Advances in Neural Information Processing Systems\/} (2017),
+  vol.~30, Curran Associates, Inc.
+
+\end{thebibliography}
