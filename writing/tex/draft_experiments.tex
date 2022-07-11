@@ -1,0 +1,113 @@
+\section{Experiments}
+This section focuses on the results gotten from the conducted experiments. These will first briefly be presented in section \ref{results}. After that, section \ref{exp:int} will discuss them in more detail, and see how they compare to previous works, etc.
+
+\subsection{Results} \label{results}
+Results are presented in the form of tables and line plots. The former of these report final testing performance, whereas the latter mostly visualise validation accuracy during training.
+
+To give a more precise description: tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) as subscript. Besides accuracy, also balanced accuracy is reported. This measure is defined as the average recall over all classes, such that it penalises errors on less occurring classes more than plain accuracy would. Lastly, green shaded cells mark best performance, while yellow and red mark second best and worst performance, respectively.
+
+For line plots, shaded regions correspond to the \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$). In cases where they show average validation accuracy, plots end when an early stop occurred for the first of 5 trials. To easily distinguish VTs from CNNs, VTs are plotted with continues lines, and CNNs with dashed ones.
+
+\subsubsection{Off the shelf learning} \label{results:ots}
+
+\begin{figure*}[tb]
+    \centering
+    \def\svgwidth{\textwidth}
+    \input{img/ots_mean_accuracy.pdf_tex}
+    \caption{Average validation accuracy when training with an off the shelf learning scheme. It can be observed that the \texttt{Swin} VT achieves the highest performance overall, but with the \texttt{ConvNext} CNN being a close second. More general, VTs perform on par with CNNs, if not slightly better.}
+    \label{results:img:ots}
+\end{figure*}
+
+\begin{table*}[tb]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllll}
+\hline
+\textbf{Model} & \textbf{Type} &  & \textbf{Material} & & \textbf{Artist} & \\
+& \textbf{Accuracy} & \textbf{Bal. accuracy} & \textbf{Accuracy} & \textbf{Bal. accuracy} & \textbf{Accuracy} & \textbf{Bal. accuracy} \\ \hline
+\textbf{vit\_b\_16} & 86.06\% $_{\pm 1.06\%}$ & 84.13\% $_{\pm 1.57\%}$ & 81.78\% $_{\pm 0.48\%}$ & 67.38\% $_{\pm 1.37\%}$ & 84.89\% $_{\pm 0.46\%}$ & 81.42\% $_{\pm 0.42\%}$  \\
+\textbf{swin\_b} & \cellcolor{bestcol}89.43\% $_{\pm 0.93\%}$ & \cellcolor{bestcol}87.47\% $_{\pm 1.02\%}$ & \cellcolor{bestcol}85.87\% $_{\pm 0.35\%}$ & \cellcolor{bestcol}71.19\% $_{\pm 1.60\%}$ & \cellcolor{bestcol}90.40\% $_{\pm 0.65\%}$ & \cellcolor{bestcol}88.64\% $_{\pm 0.78\%}$  \\
+\textbf{beit\_b\_16} & \cellcolor{worstcol}82.26\% $_{\pm 0.72\%}$ & \cellcolor{worstcol}77.75\% $_{\pm 0.27\%}$ & 76.87\% $_{\pm 0.96\%}$ & 60.16\% $_{\pm 1.56\%}$ & 79.70\% $_{\pm 0.69\%}$ & 75.35\% $_{\pm 1.09\%}$  \\
+\textbf{deit\_b\_16} & 88.18\% $_{\pm 0.66\%}$ & 85.36\% $_{\pm 0.54\%}$ & 82.80\% $_{\pm 1.12\%}$ & 66.46\% $_{\pm 1.03\%}$ & 88.13\% $_{\pm 0.76\%}$ & 85.62\% $_{\pm 0.87\%}$  \\\hdashline
+\textbf{vgg19} & 83.93\% $_{\pm 0.72\%}$ & 83.35\% $_{\pm 0.81\%}$ & 76.87\% $_{\pm 0.44\%}$ & 61.39\% $_{\pm 1.47\%}$ & 82.01\% $_{\pm 0.66\%}$ & 78.10\% $_{\pm 0.77\%}$  \\
+\textbf{resnet50} & 85.51\% $_{\pm 0.64\%}$ & 82.33\% $_{\pm 1.85\%}$ & 80.99\% $_{\pm 0.82\%}$ & 65.51\% $_{\pm 0.93\%}$ & 87.71\% $_{\pm 1.06\%}$ & 85.12\% $_{\pm 1.34\%}$  \\
+\textbf{eff. netv2\_m} & 83.41\% $_{\pm 0.76\%}$ & 82.05\% $_{\pm 1.25\%}$  & \cellcolor{worstcol}75.96\% $_{\pm 1.24\%}$ & \cellcolor{worstcol}59.15\% $_{\pm 1.24\%}$ & \cellcolor{worstcol}78.62\% $_{\pm 1.07\%}$ & \cellcolor{worstcol}73.92\% $_{\pm 0.96\%}$  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}89.19\% $_{\pm 0.64\%}$ & \cellcolor{secondbestcol}86.95\% $_{\pm 1.38\%}$ & \cellcolor{secondbestcol}84.14\% $_{\pm 0.92\%}$ & \cellcolor{secondbestcol}69.10\% $_{\pm 1.05\%}$ & \cellcolor{secondbestcol}90.13\% $_{\pm 0.94\%}$ & \cellcolor{secondbestcol}87.84\% $_{\pm 1.07\%}$  \\\hline
+\end{tabular}
+}
+\caption{Testing performance after off the shelf learning. Results are similar to validation accuracy shown in figure \ref{results:img:ots}, with \texttt{Swin} and \texttt{ConvNext} showing respective best and second best performance in all cases.}
+\label{results:tab:ots}
+\end{table*}
+
+Table \ref{results:tab:ots} shows testing performance of OTS trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracies. Performance on the testing set is comparable among all tasks in terms of rankings. Other observations are consistent as well, such as \texttt{ConvNext} taking the most epochs to converge.
+
+VTs perform very much on par with CNNs, if not slightly better. The best performing model, for instance, is the \texttt{Swin} VT, which shows the highest testing performance without exception. Moreover, all VTs except \texttt{BeiT} are positioned relatively high in the rankings. This is also reflected in their combined average accuracies being higher than those of CNNs. To give \textit{Type classification} as an example: here VTs as a group achieve an 86.5\% accuracy on average, while this is 85.5\% for CNNs.
+
+Finally, when comparing the 3 classification tasks to one another, it can be observed that highest overall accuracies are achieved for \textit{Artist classification}, and lowest ones for \textit{Material classification}. For balanced accuracy these differences are more extreme, as this measure falls behind plain accuracy the most for \textit{Material classification}, and the least for \textit{Artist classification}.
+
+% Results favorable for VTs:
+%    - Best performing model = VT (SWIN)
+%    - 3 of 4 VTs on top ?
+%    - Avg of all VTs better than avg CNNs
+
+% Talk about differences between experiments
+% Talk about balanced accuracy?
+
+\subsubsection{Fine-tuning} \label{results:ft}
+
+\begin{figure*}[tb]
+    \centering
+    \def\svgwidth{\textwidth}
+    \input{img/ft_mean_accuracy.pdf_tex}
+    \caption{Average validation accuracy when fine-tuning models on the target task. Overall, performance is higher compared to off the shelf learning in figure \ref{results:img:ots}, while the differences between models are also smaller here. The \texttt{Swin} VT and \texttt{ConvNext} CNN remain the best performing models, while in general, results are less favourable for VTs than they were for off the shelf learning.}
+    \label{results:img:ft}
+\end{figure*}
+
+\begin{table*}[tb]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllll}
+\hline
+\textbf{Model} & \textbf{Type} &  & \textbf{Material} & & \textbf{Artist} & \\
+& \textbf{Accuracy} & \textbf{Bal. accuracy} & \textbf{Accuracy} & \textbf{Bal. accuracy} & \textbf{Accuracy} & \textbf{Bal. accuracy} \\ \hline
+\textbf{vit\_b\_16} & \cellcolor{worstcol}90.11\% $_{\pm 0.35\%}$ & 87.40\% $_{\pm 0.29\%}$ & 87.42\% $_{\pm 0.45\%}$ & 73.46\% $_{\pm 1.44\%}$ & 92.05\% $_{\pm 0.44\%}$ & 89.77\% $_{\pm 0.38\%}$  \\
+\textbf{swin\_b} & \cellcolor{bestcol}92.17\% $_{\pm 0.98\%}$ & \cellcolor{secondbestcol}89.71\% $_{\pm 1.03\%}$ & \cellcolor{bestcol}89.35\% $_{\pm 0.68\%}$ & 77.16\% $_{\pm 2.98\%}$ & \cellcolor{bestcol}95.05\% $_{\pm 0.47\%}$ & \cellcolor{bestcol}93.94\% $_{\pm 0.81\%}$  \\
+\textbf{beit\_b\_16} & 90.81\% $_{\pm 0.41\%}$ & 87.95\% $_{\pm 0.69\%}$ & \cellcolor{worstcol}85.74\% $_{\pm 0.37\%}$ & \cellcolor{worstcol}72.12\% $_{\pm 1.38\%}$ & \cellcolor{worstcol}91.27\% $_{\pm 1.13\%}$ & \cellcolor{worstcol}88.83\% $_{\pm 1.63\%}$  \\
+\textbf{deit\_b\_16} & 91.78\% $_{\pm 0.64\%}$ & 89.22\% $_{\pm 0.90\%}$ & 87.85\% $_{\pm 1.12\%}$ & 74.42\% $_{\pm 1.99\%}$ & 93.37\% $_{\pm 1.15\%}$ & 91.67\% $_{\pm 1.55\%}$  \\\hdashline
+\textbf{vgg19} & 90.54\% $_{\pm 0.37\%}$ & \cellcolor{worstcol}87.05\% $_{\pm 1.03\%}$ & 85.74\% $_{\pm 1.40\%}$ & 72.43\% $_{\pm 3.03\%}$ & 92.20\% $_{\pm 0.49\%}$ & 90.18\% $_{\pm 0.72\%}$  \\
+\textbf{resnet50} & 91.78\% $_{\pm 0.44\%}$ & 88.24\% $_{\pm 0.59\%}$ & 88.69\% $_{\pm 0.99\%}$ & \cellcolor{secondbestcol}77.97\% $_{\pm 2.25\%}$ & \cellcolor{secondbestcol}94.72\% $_{\pm 0.74\%}$ & \cellcolor{secondbestcol}93.41\% $_{\pm 1.05\%}$  \\
+\textbf{eff. netv2\_m} & 90.87\% $_{\pm 0.67\%}$ & 88.34\% $_{\pm 1.37\%}$ & 87.55\% $_{\pm 1.15\%}$ & 75.31\% $_{\pm 1.60\%}$ & 92.65\% $_{\pm 0.54\%}$ & 90.84\% $_{\pm 0.51\%}$  \\
+\textbf{convnext\_b} & \cellcolor{secondbestcol}92.15\% $_{\pm 0.40\%}$ & \cellcolor{bestcol}89.82\% $_{\pm 1.18\%}$ & \cellcolor{secondbestcol}88.79\% $_{\pm 1.07\%}$ & \cellcolor{bestcol}78.40\% $_{\pm 1.26\%}$ & 94.60\% $_{\pm 0.54\%}$ & 93.13\% $_{\pm 0.61\%}$  \\\hline
+\end{tabular}
+}
+\caption{Testing performance after fine-tuning. Results are again similar to validation accuracy in figure \ref{results:img:ft}. Compared to table \ref{results:tab:ots}, it is striking that the \texttt{ConvNext} CNN now often takes the lead with respect to balanced accuracy, and that the \texttt{ResNet} CNN often takes second place.}
+\label{results:tab:ft}
+\end{table*}
+
+Once again, table \ref{results:tab:ft} shows testing performance, while figure \ref{results:img:ft} shows validation accuracies.
+
+Results are less favourable for VTs than they were for OTS learning in section \ref{results:ots}, but at the same time, it can still be said that VTs perform on par with CNNs.
+
+% Results less favourable compared to OTS
+%    - Swin still best, tho more debatable
+%    - ConvNext catching up
+%    - ResNet interesting
+%    - As groups: no differences anymore really
+
+% Overall:
+%    - higher
+%    - closer together
+%    - for all but one worst FT is better than best OTS
+%    - same observations when comparing tasks to one another
+
+\subsubsection{Scaling}
+
+\subsection{Interpretation} \label{exp:int}
+% Mention that we skip scaling here because not needed
+
+\subsubsection{Off the shelf learning}
+
+\subsubsection{Fine-tuning}
+
+\subsubsection{General}
+

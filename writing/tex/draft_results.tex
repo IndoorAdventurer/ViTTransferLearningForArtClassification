@@ -1,8 +1,8 @@
 \section{Results}
 
-This section presents results of the conducted experiments, mostly in the form of tables and line plots. Tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) as subscript. A green shaded cell marks best performance, while yellow and red depict second best and worst performance, respectively. Finally, both accuracy and balanced accuracy are reported. The latter is defined as average recall over all classes. Note how this penalises errors on less occurring classes more than plain accuracy would.
+This section presents results of the conducted experiments, mostly in the form of tables and line plots. Tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) as subscript. A green shaded cell marks best performance, while yellow and red mark second best and worst performance, respectively. Finally, both accuracy and balanced accuracy are reported. The latter of these is defined as average recall over all classes, such that it penalises errors on less occurring classes more than plain accuracy would.
 
-Line plots mostly show average validation accuracy (dashed line is CNN-based, continuous is VT-based), with \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$) depicted as a shaded region. Plots end when an early stop occurred for the first of 5 trials.
+Line plots mostly show average validation accuracy, with \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$) depicted as a shaded region. Plots end when an early stop occurred for the first of 5 trials. To easily distinguish VTs from CNNs, VTs are plotted with continues lines, and CNNs with dashed ones.
 
 % Tell that the appendix shows all other plots as well maybe. Only for the BP paper tho.
 
@@ -42,7 +42,7 @@ Table \ref{results:tab:ots} shows testing performance of OTS trained models on t
 
 \texttt{Swin} is coming out on top in all cases, which is in line with results of \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). What slightly deviates from these result, is the observation that \texttt{ViT} performs better than a \texttt{ResNet}-based model (on 2 out of 3 tasks). This comparison is, however, not meaningful, as \citeauthor{zhou2021convnets} uses \texttt{ResNet101} and 152. Testing these models instead, gives 86.21\% ($\pm$ 0.70\%) accuracy for \texttt{ResNet101}, and 86.19\% ($\pm$ 0.60\%) for \texttt{ResNet152}, which is indeed slightly higher than \texttt{ViT}'s 86.06\% shown in table \ref{results:tab:ots}.
 
-It is interesting that \texttt{VGG19} performs worse than \texttt{ResNet50}, since it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). The current study uses smaller datasets and fewer classes. The difference might be attributable to this, as \texttt{VGG19} is the largest model (see section \ref{methods:models}), and has the largest final layer -- with 4096 inputs.
+It is interesting that \texttt{VGG19} performs worse than \texttt{ResNet50}, since it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). The current study uses smaller datasets and fewer classes. The difference might be attributable to this, as \texttt{VGG19} is the largest model (see section \ref{methods:models}), and has the largest final layer (with 4096 inputs).
 
 When comparing tasks to one another, it can be observed that overall accuracies are lowest for material classification, and highest for artist classification. In addition, the difference between balanced and plain accuracy is the largest for material classification (up to 14\% on the testing set), while it is the smallest for artist classification (at most 4.7\%). Note that Gini-coefficients in table \ref{methods:datasets} show the same trend, with material classification being the least balanced, and artist classification the most.
 
@@ -111,25 +111,6 @@ The performance difference between best and worst models is much smaller compare
     \label{results:img:scale}
 \end{figure*}
 
-%\begin{figure*}
-%    \centering
-%    \begin{subfigure}{0.45\textwidth}
-%    \def\svgwidth{7.7cm}
-%    \input{img/ots_scale_acc.pdf_tex}
-%    \caption{Off the shelf}
-%    \label{results:img:ots_scale}
-%    \end{subfigure}
-%    \hfill
-%    \begin{subfigure}{0.45\textwidth}
-%    \def\svgwidth{7.7cm}
-%    \input{img/ft_scale_acc.pdf_tex}
-%    \caption{Fine tuning}
-%    \label{results:img:ft_scale}
-%    \end{subfigure}
-%    \caption{Testing accuracy as datasets become smaller.}
-%    \label{results:img:scale}
-%\end{figure*}
-
 Figure \ref{results:img:scale} shows how testing accuracy decreases when smaller portions of the full dataset are taken (see section \ref{methods:dataset}). The x-axes show a logarithmic scale, with the rightmost value being roughly 10\% the size of the leftmost one.
 
 For both OTS TL as FT TL, findings done in sections \ref{results:ots} and \ref{results:ft} seem to hold up as dataset sizes are shrunk. When going from largest to smallest dataset, the mean accuracy of all models taken together drops with 9.1\% for OTS TL. For FT this is 9.2\%, which is very similar.
@@ -153,9 +134,11 @@ OTS VTs all take roughly the same time per epoch. CNNs are generally faster here
 
 \begin{figure*}[tb]
     \includegraphics[width=\textwidth]{img/layers.png}
-    \caption{Attention layers of successively deeper transformer blocks.}
+    \caption{Attention layers of successively deeper transformer blocks. For \texttt{DeiT} attention with respect to the class-token is plotted. \texttt{Swin}, on the other hand, does not have a class-token, so average overall attention is shown. In addition, the window-shifting operations of this architecture are counteracted.}
     \label{results:img:layers}
 \end{figure*}
+
+\paragraph{Activation within VTs} To get more insights into how VTs build their representation of the input, figure \ref{results:img:layers} shows activation of attention layers for deeper and deeper blocks of \texttt{DeiT} and \texttt{Swin}. It can be observed that the first layers still retain much of a spatial layout. In fact, in the first blocks so much spatial information is kept that the input images can be recognised in the attention maps. Later layers show more sporadic activation, which would be expected from an architecture that creates a high-level encoding of the input in a hierarchical fashion.
 
 \begin{figure*}[tb]
     \centering
@@ -167,7 +150,12 @@ OTS VTs all take roughly the same time per epoch. CNNs are generally faster here
     \begin{subfigure}{0.49\textwidth}
     \includegraphics[width=8cm]{img/img011_salience.png}
     \caption{Picture}
-    \label{results:img:sal:dish}
+    \label{results:img:sal:picture}
     \end{subfigure}
-    \caption{Examples of saliency maps for different models.}
+    \caption{Example saliency maps for different models either off the shelf (OTS) or fine-tuned (FT). GradCam was implemented for \texttt{ConvNext}, and Attention Rollout for \texttt{DeiT}. Finally, for \texttt{Swin} a modified version of Attention Rollout was implemented, which simply multiplies activation with gradients for one of the later layers, instead of multiplying average gradients per CNN channel with that channel's activation map.}
+    \label{results:img:sal}
 \end{figure*}
+% TODO find references for the saliency techniques!!!
+
+\paragraph{Saliency}
+Figure \ref{results:img:sal} shows saliency maps for the \texttt{ConvNext} CNN, and the \texttt{DeiT} and \texttt{Swin} VTs. It can be observed that for ConvNext representations differ more when comparing OTS TL to FT TL. In the case of figure \ref{results:img:sal:picture}, for example, the model learns to focus on the frame to classify the input as a picture after FT, while it was not able to do this after OTS TL. In the case of figure \ref{results:img:sal:dish}, something similar can be observed. The fine-tuned \texttt{ConvNext} learns to focus more on the center of the object, which seems to make the difference between a wrong and a correct classification.
