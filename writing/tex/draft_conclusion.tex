@@ -1,0 +1,14 @@
+\section{Conclusion}
+
+Seeing which is better, VTs or CNNs, has never been the goal of this paper. The underlying architecture is not important, as one should always pick (or create) the model that fits the task best. What this paper, in fact, was interested in, is whether VTs can become a valuable alternative to CNNs under specific circumstances. So what, then, are these circumstances? Well, they can be described as those in which:
+\begin{itemize}
+\item small datasets are available: specifically, small enough to have been hand labelled by one person;
+\item only consumer grade hardware is available.
+\end{itemize}
+In other words: this paper was interested in the type of machine learning one could try at home, and wanted to know if VTs can be put to good use there.
+
+The way it tried to put them to use, is by utilising transfer learning. In the domain of art classification, it compared common CNNs and VTs to one another, for both off the shelf learning, where only the last layer of a pre-trained model is retrained on the new task, and fine-tuning, where the whole model is retrained.
+
+The results showed that VTs are very well able to perform on par with CNNs for both off the shelf learning and fine-tuning. The most interesting architecture was the \texttt{Swin} VT, which gave best testing performance in almost all cases. Consequently, this model will be one of the firsts the author considers if he is ever faced with another computer vision task. Provided, of course, that the field does not catch up in ways that draw all models described here obsolete...
+
+% TODO: more blabla

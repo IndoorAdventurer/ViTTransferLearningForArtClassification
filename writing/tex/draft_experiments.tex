@@ -122,6 +122,7 @@ For both OTS learning as FT, findings done in sections \ref{results:ots} and \re
 
 Lastly, when going from largest to smallest dataset, the mean accuracy of all models taken together drops with 9.1\% for OTS learning. For FT this is 9.2\%, which is very similar. This, then, does not suggest that at some point OTS learning becomes preferred due to overfitting problems for FT. % TODO Maybe save this for Interpretation
 
+
 \subsection{Interpretation} \label{exp:int} % TODO maybe change to Discussion instead
 While most results have now been presented, it is still important to discuss them in more detail, as this leads to a more complete interpretation. This section attempts to provide such a discussion, by answering questions one might have at this moment. It will first discuss the aforementioned experiments individually, but will conclude with remarks that are more general. Topics will include: comparisons with earlier studies, potential shortcomings, and hypotheses that might explain certain observations.
 
@@ -132,22 +133,34 @@ Of all related work mentioned in section \ref{related_work}, \citeauthor{zhou202
 
 Besides \texttt{Swin}, \citeauthor{zhou2021convnets} also included \texttt{ViT} and \texttt{ResNet101} in its comparisons (among others), and consistently found that \texttt{ResNet101} outperformed \texttt{ViT}. The current study, on the other hand, uses \texttt{ResNet50}, which performs worse than \texttt{ViT} on all tasks except \textit{Artist classification}. Running the same experiments with \texttt{ResNet101} does, however, lead to similar findings as \citeauthor{zhou2021convnets}. On \textit{Type classification}, for example, it achieves a mean testing accuracy of  $86.21\% (\pm 0.70\%)$, which is indeed slightly higher than \texttt{ViT}'s 86.06\% shown in table \ref{results:tab:ots}. Mind that these differences are slight compared to the 89.43\% accuracy achieved by \texttt{Swin} here, so replacing \texttt{ResNet50} by \texttt{ResNet101} would not have affected the overall observations that much.
 
-Finally, because \texttt{VGG19} was specifically selected for its good OTS performance in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), it is interesting that this model is outperformed by \texttt{ResNet50} (which that paper also included) in table \ref{results:tab:ots}. \texttt{VGG19} is the largest model of all (arguably too large), so this discrepancy might be attributable to the far smaller datasets used in the current study (see section \ref{methods:dataset}). Additionally, it might also be attributable to the smaller number of classes used here. \texttt{VGG19} has the largest final layer, containing 4096 inputs. In \citeauthor{sabatelli2018deep} this might have provided the expressive power needed to differentiate between a few hundred classes after just OTS learning, while here it would cause overfitting before good convergence is reached.
+Finally, because \texttt{VGG19} was specifically selected for its good OTS performance in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), it is interesting that this model is outperformed by \texttt{ResNet50} (which that paper also included) in table \ref{results:tab:ots}. \texttt{VGG19} is the largest model of all (arguably too large), so this discrepancy might be attributable to the far smaller datasets used in the current study (see section \ref{methods:dataset}). Additionally, it might also be attributable to the smaller number of classes used here: \texttt{VGG19} has the largest final layer, containing 4096 inputs. While in \citeauthor{sabatelli2018deep} this might have provided the expressive power needed to differentiate between a few hundred classes after just OTS learning, here it likely causes overfitting before good convergence is reached.
 
-%It stands out that \texttt{VGG19} is outperformed by \texttt{ResNet50} in table \ref{results:tab:ots}, as this model was specifically selected for its good OTS performance in \citeauthor{sabatelli2018deep}. 
+\paragraph{Why do VTs show such good performance here?}
 
-%It is interesting that \texttt{VGG19} performs worse than \texttt{ResNet50}, since it was the best performing OTS model on all 3 tasks in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}). The current study uses smaller datasets and fewer classes. The difference might be attributable to this, as \texttt{VGG19} is the largest model (see section \ref{methods:models}), and has the largest final layer (with 4096 inputs). DIT KAN IK NU WEL EVEN WAT MEER UITLEGGEN NATUURLIJK!!! MORE EXPRESSIVE POWER FOR OTS WITH MORE CLASSES THERE
+\begin{figure*}[tb]
+    \includegraphics[width=\textwidth]{img/layers.png}
+    \caption{Attention layers of successively deeper transformer blocks. One can recognise the input image in earlier layers, while for later ones activation seems sporadic. For \texttt{DeiT}, attention with respect to the class-token is plotted. \texttt{Swin}, on the other hand, does not have a class-token, so average overall attention is used instead. In addition, the window-shifting operations of this architecture are counteracted.}
+    \label{results:img:layers}
+\end{figure*}
 
-\paragraph{Why do VTs show such good OTS performance?} ANSWER.
+While results are in line with previous studies, it was still surprising to see that VTs showed such good OTS learning performance in section \ref{results:ots}. It suggests that these transformer based architectures are able to give a very complete, high level encoding of the input image. For CNNs this is commonly thought to be true, as they are often described as hierarchical feature extractors that build successively higher level feature maps from lower level ones (see section \ref{intro:cnns}). If the same is true for VTs, is not well understood at this moment. Or at least to the best of the author's knowledge, that is.
+
+A hint of an answer can, however, be found when plotting activation of successively deeper attention layers, as is done in figure \ref{results:img:layers}. While earlier layers retain much spatial information, later ones show more sporadic activation patters. This is what one might expect from an hierarchical feature extractor: the random pixels lighting up might then, for example, correspond to specific, high level properties of the input. Nevertheless, it should be emphasised that no strong conclusions should be drawn from these images, and that more research is required to understand how VTs function.
 % Also mention that this was unexpected (but in line with blabla);
 % Feature extractor/hierarchical representation building
 % Layers img.
-% Maybe mention that image specific inductive bias isn't a problem for swin?
+% Maybe mention that image specific inductive bias isn't a problem for swin? TODO somewhere else!
 
 \subsubsection{Fine-tuning}
 
-\paragraph{How do these results compare to related studies?} ANSWER.
-%Different from \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}), \texttt{ResNet50} performs slightly better than \texttt{DeiT}. This remains true when using the same `tiny' version of \texttt{DeiT} as that paper used. On type classification, for example, it gets 90.44\% ($\pm$ 0.93\%) accuracy, whereas \texttt{ResNet50} shows 91.78\% in table \ref{results:tab:ft}.
+\paragraph{How do these results compare to related studies?}
+That the \texttt{Swin} VT performs well after FT, is again consistent with \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). That paper, however, also shows \texttt{ViT} outperforming the \texttt{ResNet101} and \texttt{ResNet152} CNNs. This differs from the results in table \ref{results:tab:ft}, where \texttt{ViT} does not perform well overall, and with 90.11\% even shows the worst testing accuracy on \textit{Type classification}. \texttt{ResNet50} achieves 91.78\% here, and testing the same \texttt{ResNet} versions \citeauthor{zhou2021convnets} used, gives 91.96\% ($\pm$ 0.59\%) accuracy for \texttt{ResNet101}, and 91.94\% ($\pm$ 0.25) for \texttt{ResNet152}.
+
+Results are also less favourable for VTs compared to \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}). In that paper the `tiny' version of \texttt{DeiT} outperforms \texttt{ResNet50}, while in table \ref{results:tab:ft} this same \texttt{ResNet50} performs slightly better than the `base' version of \texttt{DeiT}. Going `tiny' also does not help: on \textit{Type classificaiton}, for instance, `tiny' \texttt{DeiT} gets 90.44\% ($\pm$ 0.93\%), which is even worse than `base' \texttt{DeiT}'s 91.78\% in table \ref{results:tab:ots}.
+
+These slight performance differences could be attributable to the different datasets used. In that case, it seems, VTs have certain strengths that those other datasets take more advantage of. Alternatively, it could also be that hyperparameters and regularisation could still be improved. The reason for thinking this, is that preliminary experiments suggested that VTs benefit more from regularisation than CNNs do.
+
+Finally, it was observed that \texttt{ResNet50} appears to flourish with FT, sometimes even beating Conv\-Next in the rankings. This is consistent with \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), where it was the best FT model overall.
 
 %FT results in this work also seem less favourable for VTs compared to \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). \texttt{ViT} consistently falls behind \texttt{ResNet50}, and even shows the worst accuracy in table \ref{results:tab:ft} (90.11\%), while in \citeauthor{zhou2021convnets} it was \texttt{ViT} that outperformed \texttt{ResNet101} and 152. It should be mentioned that these two alternatives show performance similar to \texttt{ResNet50}, with type classification accuracies of 91.96\% ($\pm$ 0.59\%) and 91.94\% ($\pm$ 0.25), respectively. Lastly, what is consistent with \citeauthor{zhou2021convnets}, is the good performance of \texttt{Swin} mentioned above.
 
@@ -155,20 +168,20 @@ Finally, because \texttt{VGG19} was specifically selected for its good OTS perfo
 
 %\texttt{VGG19} has dropped further in the rankings, and now shows the worst balanced accuracy for type classification. \texttt{ResNet50}, on the other hand, appears to flourish with FT, often even beating Conv\-Next in the rankings. This is consistent with \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), where it was the best FT model overall.
 
-\paragraph{Do CNNs gain more from FT than VTs?} ANSWER.
+\paragraph{Do CNNs gain more from FT than VTs?}
 % Show saliency maps here
 
 \subsubsection{Scaling}
 
-\paragraph{What can be concluded from these results?} ANSWER.
+\paragraph{What can be concluded from these results?}
 % This, then, does not suggest that at some point OTS learning becomes preferred due to overfitting problems for FT.
 
-\paragraph{Are there any shortcomings?} ANSWER.
+\paragraph{Are there any shortcomings?}
 % Same training/testing/validating split used. Was that smart? Defense: 5 runs so that makes up for too small testing sets
 
 \subsubsection{Overall}
 
-\paragraph{Why does \textit{Artist classification} show the best overall performance?} ANSWER.
+\paragraph{Why does \textit{Artist classification} show the best overall performance?}
 % Sabatelli different
 % GINI COEFFICIENTS HYPOTHESIS!!!:
 % This seems counterintuitive, as one would think artist identification is much more challenging than determining if something is a painting, or if it is made out of paper instead of wood. An explanation can likely be found in table \ref{methods:datasets}, which shows that material and artist classification sets are the least and most balanced, respectively. In addition, tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show that balanced accuracies are up to 14\% lower than plain ones for material classification, while they are much closer for artist classification. This suggests much accuracy is lost by misclassifying instances of less occurring classes in favor of more occurring ones. Similar finding can be done for FT results in section \ref{results:ft}.
