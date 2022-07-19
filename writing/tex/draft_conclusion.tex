@@ -1,16 +1,15 @@
 \section{Conclusion}
-
-% TODO dit moet echt allemaal nog een stuk beter!
-
-Seeing which is better, VTs or CNNs, has never been the goal of this paper. The underlying architecture is somewhat irrelevant, as one should always pick (or create) the model that fits the task best. What this paper, then, was interested in, is whether VTs can become a valuable alternative to CNNs under circumstances in which:
+Seeing which is better, VTs or CNNs, has never been the goal of this paper. The underlying architecture is somewhat irrelevant, as one should always pick (or create) the model that fits the task best -- regardless of whether it is a VT, CNN, or something else. What this paper, then, was interested in, is whether VTs can become a valuable alternative to CNNs under circumstances in which:
 \begin{itemize}
 \item small datasets are used: specifically, small enough to have been hand labelled by one person;
 \item only consumer grade hardware is available.
 \end{itemize}
-In other words: this paper was interested in the type of machine learning one could try at home, and wanted to know if VTs can be put to good use there.
+In other words: this paper was interested in the type of machine learning one could try at home, and wanted to know if VTs could be made useful for it.
 
-The way it tried to put them to use, is by utilising transfer learning. In the domain of art classification, it compared common CNNs and VTs to one another, for both off the shelf learning, where only the last layer of a pre-trained model is retrained on the new task, and fine-tuning, where the whole model is retrained.
+To that end, it tried to utilise transfer learning methods, as these might help overcome problems that arise from VTs' lack of an inductive bias. More concretely, models pre-trained on ImageNet1K were either used as off the shelf feature extractors, or fine-tuned to new tasks. These tasks were all taken from the \textit{Rijksmuseum Challenge} dataset \citep{mensink14icmr}, and fall within the domain of art classification.
 
-The results showed that VTs are very well able to perform on par with CNNs for both off the shelf learning and fine-tuning. The most interesting architecture was the \texttt{Swin} VT, which gave best testing performance in almost all cases. Consequently, this model will be one of the firsts the author considers if he is ever faced with another computer vision task. Provided, of course, that the field does not catch up in ways that draw all models described here obsolete...
+The results demonstrated that VTs are very well able to perform on par with CNNs here. Especially the \texttt{Swin} VT showed promising results, and might be worth considering for future learning problems.
 
-% TODO: more blabla
+\texttt{ConvNext} was a close second in the rankings. It is interesting that this best performing CNN was inspired by VTs, while the best performing VT \texttt{Swin} took inspiration from CNNs. It shows the kind of cross-fertilization that moves the field forward, but also hints at something bigger that would be nice to conclude with.
+
+No matter what happens. No matter if VTs, CNNs, a hybrid architecture, or even something completely different rains supreme in the coming years; it is great that VTs came about. It shakes things up, and forces researchers to look at problems from a different perspective. Perhaps that, then, will be VTs' greatest contribution of all.

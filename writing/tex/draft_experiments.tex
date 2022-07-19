@@ -88,7 +88,7 @@ Once again, table \ref{results:tab:ft} shows testing performance, while figure \
 
 Results are less favourable for VTs than they were for OTS learning in section \ref{results:ots}. At the same time, it can still be said that VTs perform on par with CNNs. The \texttt{Swin} VT shows the best overall testing accuracy here as well, but the \texttt{ConvNext} CNN is not far behind, and outperforms \texttt{Swin} in terms of balanced accuracy. Also noteworthy is the \texttt{ResNet} CNN, which is ranked higher here than it was for OTS learning, and now shows second best testing performance for \textit{Artist classification}.
 
-VTs and CNNs in general are much closer together. To again take \textit{Type classification} as an example: the mean testing accuracy of all VTs combined is 91.2\% on this task, while it is 91.3\% for CNNs. Recall that section \ref{results:ots} reported a difference of 1\% in favour of VTs here, with an accuracy of 86.5\% for VTs, and 85.5\% for CNNs.
+VTs and CNNs grouped together are much more evenly matched. To again take \textit{Type classification} as an example: the mean testing accuracy of all VTs combined is 91.2\% on this task, while it is 91.3\% for CNNs. Recall that section \ref{results:ots} reported a difference of 1\% in favour of VTs here, with an accuracy of 86.5\% for VTs, and 85.5\% for CNNs.
 
 More general, it can be observed that FT leads to substantially better performance than OTS learning, and that models are now much closer together. The difference between highest and lowest testing accuracy, for example, is at most 3.8\% after FT, while it was between 7.2\% and 11.8\% after OTS learning. In addition, the worst testing accuracy after FT is most often still higher than the best accuracy after OTS learning. The only exception is \textit{Material classification}, where the worst FT model (\texttt{BeiT}) has accuracy 85.74\%, and the best OTS one (\texttt{Swin}) has 85.87\%.
 
@@ -123,8 +123,8 @@ For both OTS learning as FT, findings done in sections \ref{results:ots} and \re
 Lastly, when going from largest to smallest dataset, the mean accuracy of all models taken together drops with 9.1\% for OTS learning. For FT this is 9.2\%, which is very similar. This, then, does not suggest that at some point OTS learning becomes preferred due to overfitting problems for FT.
 
 
-\subsection{Interpretation} \label{exp:int} % TODO maybe change to Discussion instead
-While most results have now been presented, it is still important to discuss them in more detail, as this leads to a more complete interpretation. This section attempts to provide such a discussion, by answering questions one might have at this moment. It will first discuss some aforementioned experiments individually, but will conclude with remarks that are more general. Topics will include: comparisons with earlier studies, potential shortcomings, and hypotheses that might explain certain observations.
+\subsection{Discussion} \label{exp:int} % TODO maybe change to Interpretation instead
+While most results have now been presented, it is still important to discuss them in more detail, as this leads to a more complete interpretation. This section attempts to provide such a discussion, by answering questions one might have at this moment. It will first address some of the aforementioned experiments individually, but will conclude with remarks that are more general. Topics will include: comparisons with earlier studies, potential shortcomings, and hypotheses that might explain certain observations.
 
 \subsubsection{Off the shelf learning}
 
@@ -192,11 +192,11 @@ The images in figure \ref{results:img:sal} are representative examples, and show
 \subsubsection{Overall}
 
 \paragraph{Why does \textit{Artist classification} show the best overall performance?}
-This might seem counter-intuitive: one would think it is much easier to determine if something is a painting or a sculpture, than who the creator is. However, because only the top 30 classes are used, this is not necessarily true.
+This might seem counter-intuitive: one would think that it is much easier to determine if something is a painting or a sculpture, than determining who the creator is. However, because only the top 30 classes are used, this is not necessarily true.
 
-Figure \ref{methods:eg} shows example images for all tasks. On the one hand, it shows much heterogeneity for the \textit{Artist classification} task, since authors work in very different styles and mediums. On the other hand, it also shows difficulties for the other tasks: \textit{Material classification}, which seems to be the most challenging task, shows examples of both big differences within classes (note how the two instances of porcelain are very different), and small differences between classes (note how the porcelain plate is very similar to the faience plate).
+Figure \ref{methods:eg} shows example images for all tasks. On the one hand, it shows much heterogeneity for the \textit{Artist classification} task, with artists working in very different styles and mediums. On the other hand, it also shows difficulties for the other tasks: \textit{Material classification}, which seems to be the most challenging task, shows examples of both big differences within classes (note how the two instances of porcelain are very different), and small differences between classes (note how the porcelain plate is very similar to the faience plate).
 
-Then there is the problem of balance. It was mentioned earlier that balanced accuracy falls behind plain accuracy the most for \textit{Material classification}, and the least for \textit{Artist classification}. At the same time, table \ref{methods:datasets} shows that it is also \textit{Material classification} which is the least balanced (gini-coefficient of 0.563), while it is \textit{Artist classification} that is the most balanced (coefficient 0.236). This suggests that balance is hurting the performance measures, so also plain accuracy, the least for \textit{Artist classification}.
+Then there is the problem of balance. It was mentioned earlier that balanced accuracy falls behind plain accuracy the most for \textit{Material classification}, and the least for \textit{Artist classification}. At the same time, table \ref{methods:datasets} shows that it is also \textit{Material classification} which is the least balanced (gini-coefficient of 0.563), while it is \textit{Artist classification} that is the most balanced (coefficient 0.236). This suggests that balance is hurting performance the least for \textit{Artist classification} -- and the most for \textit{Material classification}.
 
 % Sabatelli different
 % GINI COEFFICIENTS HYPOTHESIS!!!:
@@ -205,7 +205,7 @@ Then there is the problem of balance. It was mentioned earlier that balanced acc
 \paragraph{The same hyperparameters are used for all models. Is this fair?}
 The final learning scheme was chosen after extensive hyperparameter optimization, and was partially inspired by related work. It is possible that doing this for each model individually, would have resulted in \textit{slightly} higher performances. This paper, however, does not aim to get the best possible performance, but instead wants to see how models compare to one another. It is unlikely that individually tuning each model would have changed overall findings.
 
-A small asterisk to be made here, is that VTs might benefit more from better regularisation than CNNs (see section \ref{exp:int:ft}). Still, final accuracy should not be the only concern, because ease of use will also determine to what degree VTs are a valuable alternative to CNNs. Moreover, the main finding of this paper seems to be that VTs are able to perform on par with CNNs. Slightly better performance for VTs would not exactly hurt this finding.
+A small asterisk to be made here, is that VTs might benefit more from better regularisation than CNNs (see section \ref{exp:int:ft}). Still, final accuracy should not be the only concern, because ease of use (i.e. effort needed to find the right hyperparameters) will also determine to what degree VTs are a valuable alternative to CNNs. Moreover, the main finding of this paper seems to be that VTs are able to perform on par with CNNs. Slightly better performance for VTs would not exactly hurt this finding.
 
 % Preliminary studies
 % Not about getting the best overall performance, but seeing how they compare to one another
@@ -214,7 +214,7 @@ A small asterisk to be made here, is that VTs might benefit more from better reg
 \paragraph{To what extent are the chosen models representative for all VTs and CNNs?}
 Most models were selected because of their mention in related work. Notable exceptions are \texttt{ConvNext} and \texttt{EfficientNetV2}, which were selected because they are equally recent as the used VTs. Many of these models are popular/common, but one can't say they are a representative sample. The question, of course, is also not how VTs and CNNs as a group compare to one another. Instead, the question is if the VT landscape as a whole has something to offer that could be an interesting alternative to common CNNs.
 
-More interesting is the question if, for example, `tiny' or `medium' sized version should have been used instead of `base' versions. On \textit{Type classification} `tiny' models were tested as well, and results were reported where appropriate. Overall, however, these results did not suggest that using `tiny' versions everywhere have would made much of a difference.
+It is also interesting to wonder if, for example, `tiny' or `medium' sized version should have been used instead of `base' versions. All available `tiny' models were tested as well, and results have been reported where appropriate (e.g. section \ref{exp:int:ft}). Overall, however, these results did not suggest that using `tiny' versions would have made much of a difference for the rankings: `tiny' \texttt{Swin} and \texttt{ConvNext}, for example, remained superior under that circumstance.
 
 \paragraph{What can be concluded from the results presented?}
 
@@ -226,3 +226,12 @@ More interesting is the question if, for example, `tiny' or `medium' sized versi
     \label{results:img:ots_vs_ft_type}
 \end{figure}
 
+After OTS learning, results are slightly better for VTs, while after FT, results are almost the same for CNNs and VTs. With that said, it seems, VTs are very much able to perform on par with CNNs on the described art classification problems. Especially \texttt{Swin} and \texttt{DeiT} showed promising performance, and together with \texttt{ConvNext}, might be interesting models to consider.
+
+Of course, final accuracy is not the full story, since time/accuracy trade-offs, for example, might also determine which model is preferred. Figure \ref{results:img:ots_vs_ft_type} plots \textit{Type classification} accuracies of tables \ref{results:tab:ots} and \ref{results:tab:ft} against training time per epoch. Total training time was not chosen instead, as this measure depends much more on selected hyperparameters.
+
+The best overall performing model is a fine-tuned VT (\texttt{Swin}). At the same time, it is a CNN that shows the best time/accuracy trade-offs, because it is able to perform better than any OTS trained model, while still taking less time per epoch than any OTS trained VT. The particular CNN this regards, is \texttt{ResNet50}. Recall that this model only had 25.6 million parameters, while most VTs had around 86 million.
+
+All `tiny' VTs are around the same size as \texttt{ResNet50}, and using these would have changed the situation here completely. As such, taking figure \ref{results:img:ots_vs_ft_type} with a grain of salt, would be appropriate.
+
+Still, it seemed fitting to conclude with this figure, as it neatly summarises all the main findings done in this section.
