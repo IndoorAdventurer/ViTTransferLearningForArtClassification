@@ -2,11 +2,11 @@
 This section focuses on the results gotten from the conducted experiments. These will first briefly be presented in section \ref{results}. After that, section \ref{exp:int} will discuss them in more detail, and see how they compare to earlier studies, etc.
 
 \subsection{Results} \label{results}
-Results are presented in the form of tables and line plots. The former of these report final testing performance, whereas the latter mostly visualise validation accuracy during training.
+Results are presented in the form of tables and line plots. The former of these reports final testing performance, whereas the latter mostly visualizes validation accuracy during training.
 
-To give a more precise description: tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) as subscript. Besides accuracy, also balanced accuracy is reported. This measure is defined as the average recall over all classes, such that it penalises errors on less occurring classes more than plain accuracy would. Lastly, green shaded cells mark best performance, while yellow and red mark second best and worst performance, respectively.
+To give a more precise description: tables show average testing performance over the 5 trials per experiment, with standard deviation ($s$) as a subscript. Besides accuracy, also balanced accuracy is reported. This measure is defined as the average recall over all classes, such that it penalizes errors on less occurring classes more than plain accuracy would. Lastly, green shaded cells mark best performance, while yellow and red mark second best and worst performance, respectively.
 
-For line plots, shaded regions correspond to the \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$). In cases where they show average validation accuracy, plots end when an early stop occurred for the first of 5 trials. To easily distinguish VTs from CNNs, VTs are plotted with continues lines, and CNNs with dashed ones.
+For line plots, shaded regions correspond to the \textit{standard error of the mean} ($\pm s \div \sqrt{N}$, where $N=5$). In cases where they show average validation accuracy, plots end when an early stop occurred for the first of 5 trials. To easily distinguish VTs from CNNs, VTs are plotted with continuous lines, and CNNs with dashed ones.
 
 \subsubsection{Off-the-shelf learning} \label{results:ots}
 
@@ -35,15 +35,15 @@ For line plots, shaded regions correspond to the \textit{standard error of the m
 \textbf{convnext\_b} & \cellcolor{secondbestcol}89.19\% $_{\pm 0.64\%}$ & \cellcolor{secondbestcol}86.95\% $_{\pm 1.38\%}$ & \cellcolor{secondbestcol}84.14\% $_{\pm 0.92\%}$ & \cellcolor{secondbestcol}69.10\% $_{\pm 1.05\%}$ & \cellcolor{secondbestcol}90.13\% $_{\pm 0.94\%}$ & \cellcolor{secondbestcol}87.84\% $_{\pm 1.07\%}$  \\\hline
 \end{tabular}
 }
-\caption{Testing performance after off-the-shelf learning. Results are similar to validation accuracy shown in figure \ref{results:img:ots}, with \texttt{Swin} and \texttt{ConvNext} showing respective best and second best performance in all cases.}
+\caption{Testing performance after off-the-shelf learning. Results are similar to validation accuracy shown in figure \ref{results:img:ots}, with \texttt{Swin} and \texttt{ConvNext} showing the respective best and second best performance in all cases.}
 \label{results:tab:ots}
 \end{table*}
 
-Table \ref{results:tab:ots} shows testing performance of OTS trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracies. Performance on the testing set is comparable among all tasks in terms of rankings. Other observations are consistent as well, such as \texttt{ConvNext} taking the most epochs to converge.
+Table \ref{results:tab:ots} shows the testing performance of OTS-trained models on the 3 classification tasks, while figure \ref{results:img:ots} shows corresponding validation accuracies. Performance on the testing set is comparable among all tasks in terms of rankings. Other observations are consistent as well, such as \texttt{ConvNext} taking the most epochs to converge.
 
-VTs perform very much on par with CNNs, if not slightly better. The best performing model, for instance, is the \texttt{Swin} VT, which shows the highest testing performance without exception. Moreover, all VTs except \texttt{BeiT} are positioned relatively high in the rankings. This is also reflected in their combined average accuracies being higher than those of CNNs. To give \textit{Type classification} as an example: here VTs as a group achieve an 86.5\% mean accuracy, while this is 85.5\% for CNNs.
+VTs perform very much on par with CNNs, if not slightly better. The best-performing model, for instance, is the \texttt{Swin} VT, which shows the highest testing performance without exception. Moreover, all VTs except \texttt{BeiT} are positioned relatively high in the rankings. This is also reflected in their combined average accuracies being higher than those of CNNs. To give \textit{Type classification} as an example: here VTs as a group achieve an 86.5\% mean accuracy, while this is 85.5\% for CNNs.
 
-Finally, when comparing the 3 classification tasks to one another, it can be observed that highest overall accuracies are achieved for \textit{Artist classification}, and lowest ones for \textit{Material classification}. For balanced accuracy the differences are more extreme, as this measure also falls behind plain accuracy the most for \textit{Material classification}, and the least for \textit{Artist classification}.
+Finally, when comparing the 3 classification tasks to one another, it can be observed that the highest overall accuracies are achieved for \textit{Artist classification}, and the lowest ones for \textit{Material classification}. For balanced accuracy, the differences are more extreme, as this measure also falls behind plain accuracy the most for \textit{Material classification}, and the least for \textit{Artist classification}.
 
 % Results favorable for VTs:
 %    - Best performing model = VT (SWIN)
@@ -59,7 +59,7 @@ Finally, when comparing the 3 classification tasks to one another, it can be obs
     \centering
     \def\svgwidth{\textwidth}
     \input{img/ft_mean_accuracy.pdf_tex}
-    \caption{Average validation accuracy when fine-tuning models on the target task. Overall, performance is higher compared to off-the-shelf learning in figure \ref{results:img:ots}, while the differences between models are also smaller here. The \texttt{Swin} VT and \texttt{ConvNext} CNN remain the best performing models, while in general, results are less favourable for VTs than they were after off-the-shelf learning.}
+    \caption{Average validation accuracy when fine-tuning models on the target task. Overall, performance is higher compared to off-the-shelf learning in figure \ref{results:img:ots}, while the differences between models are also smaller here. The \texttt{Swin} VT and \texttt{ConvNext} CNN remain the best performing models, while in general, results are less favorable for VTs than they were after off-the-shelf learning.}
     \label{results:img:ft}
 \end{figure*}
 
@@ -86,13 +86,13 @@ Finally, when comparing the 3 classification tasks to one another, it can be obs
 
 Once again, table \ref{results:tab:ft} shows testing performance, while figure \ref{results:img:ft} shows validation accuracies.
 
-Results are less favourable for VTs than they were after OTS learning in section \ref{results:ots}. At the same time, it can still be said that VTs perform on par with CNNs. The \texttt{Swin} VT shows the best overall testing accuracy here as well, but the \texttt{ConvNext} CNN is not far behind, and outperforms \texttt{Swin} in terms of balanced accuracy. Also noteworthy is the \texttt{ResNet50} CNN, which is ranked higher here than it was for OTS learning, and now shows second best testing performance for \textit{Artist classification}.
+Results are less favorable for VTs than they were after OTS learning in section \ref{results:ots}. At the same time, it can still be said that VTs perform on par with CNNs. The \texttt{Swin} VT shows the best overall testing accuracy here as well, but the \texttt{ConvNext} CNN is not far behind, and outperforms \texttt{Swin} in terms of balanced accuracy. Also noteworthy is the \texttt{ResNet50} CNN, which is ranked higher here than it was for OTS learning, and now shows the second best testing performance for \textit{Artist classification}.
 
-VTs and CNNs grouped together are much more evenly matched. To again take \textit{Type classification} as an example: the mean testing accuracy of all VTs combined is 91.2\% on this task, while it is 91.3\% for CNNs. Recall that section \ref{results:ots} reported a difference of 1\% in favour of VTs here, with an accuracy of 86.5\% for VTs, and 85.5\% for CNNs.
+VTs and CNNs grouped are much more evenly matched. To again take \textit{Type classification} as an example: the mean testing accuracy of all VTs combined is 91.2\% on this task, while it is 91.3\% for CNNs. Recall that section \ref{results:ots} reported a difference of 1\% in favor of VTs here, with an accuracy of 86.5\% for VTs, and 85.5\% for CNNs.
 
-More general, it can be observed that FT leads to substantially better performance than OTS learning, and that models are now much closer together. The difference between highest and lowest testing accuracy, for example, is at most 3.8\% after FT, while it was between 7.2\% and 11.8\% after OTS learning. In addition, the worst testing accuracy after FT is most often still higher than the best accuracy after OTS learning. The only exception is \textit{Material classification}, where the worst FT model (\texttt{BeiT}) has accuracy 85.74\%, and the best OTS one (\texttt{Swin}) has 85.87\%.
+More generally, it can be observed that FT leads to substantially better performance than OTS learning, and that models are now much closer together. The difference between the highest and lowest testing accuracy, for example, is at most 3.8\% after FT, while it was between 7.2\% and 11.8\% after OTS learning. In addition, the worst testing accuracy after FT is most often still higher than the best accuracy after OTS learning. The only exception is \textit{Material classification}, where the worst FT model (\texttt{BeiT}) has an accuracy of 85.74\%, and the best OTS one (\texttt{Swin}) has 85.87\%.
 
-Lastly, note that highest overall performances are again achieved on the \textit{Artist classification} task, while the lowest ones are reported for \textit{Material classification}. The difference between plain and balanced accuracy is also again the largest for \textit{Material classification}, and lowest for \textit{Artist classification}.
+Lastly, note that the highest overall performances are again achieved on the \textit{Artist classification} task, while the lowest ones are reported for \textit{Material classification}. The difference between plain and balanced accuracy is also again the largest for \textit{Material classification}, and lowest for \textit{Artist classification}.
 
 % Results less favourable compared to OTS
 %    - Swin still best, tho more debatable
@@ -112,26 +112,26 @@ Lastly, note that highest overall performances are again achieved on the \textit
     \centering
     \def\svgwidth{\textwidth}
     \input{img/scaling_accuracy.pdf_tex}
-    \caption{Testing accuracy as datasets gradually become smaller. The x-axes show a logarithmic scale, with the smallest value being roughly 10\% the size of largest one. Observations done in sections \ref{results:ots} and \ref{results:ft} appear to hold up well as the training set is shrunk.}
+    \caption{Testing accuracy as datasets gradually become smaller. The x-axes show a logarithmic scale, with the smallest value being roughly 10\% the size of the largest one. Observations done in sections \ref{results:ots} and \ref{results:ft} appear to hold up well as the training set is shrunk.}
     \label{results:img:scale}
 \end{figure*}
 
 Figure \ref{results:img:scale} shows how testing accuracy decreases when smaller portions of the full dataset are taken (see section \ref{methods:dataset}). The x-axes show a logarithmic scale, where each successive value is roughly 56\% the size of its predecessor.
 
-For both OTS learning as FT, findings done in sections \ref{results:ots} and \ref{results:ft} seem to hold up as dataset sizes are shrunk. It is not true, for example, that at some point CNNs start to outperform VTs. In addition, \texttt{Swin} and \texttt{ConvNext} remain some of the best performing models throughout. 
+For both OTS learning as FT, findings done in sections \ref{results:ots} and \ref{results:ft} seem to hold up as dataset sizes are shrunk. It is not true, for example, that at some point CNNs start to outperform VTs. In addition, \texttt{Swin} and \texttt{ConvNext} remain some of the best-performing models throughout. 
 
 Lastly, when going from largest to smallest dataset, the mean accuracy of all models taken together drops with 9.1\% for OTS learning. For FT this is 9.2\%, which is very similar. This, then, does not suggest that at some point OTS learning becomes preferred due to overfitting problems for FT.
 
 
 \subsection{Discussion} \label{exp:int} % TODO maybe change to Interpretation instead
-While most results have now been presented, it is still important to discuss them in more detail, as this leads to a more complete interpretation. This subsection attempts to provide such a discussion, by answering questions one might have at this moment. It will first address some of the aforementioned experiments individually, but will conclude with remarks that are more general. Topics will include: comparisons with earlier studies, potential shortcomings, and hypotheses that might explain certain observations.
+While most results have now been presented, it is still important to discuss them in more detail, as this leads to a more complete interpretation. This subsection attempts to provide such a discussion, by answering questions one might have at this moment. It will first address some of the aforementioned experiments individually, but will conclude with more general remarks. Topics will include: comparisons with earlier studies, potential shortcomings, and hypotheses that might explain certain observations.
 
 \subsubsection{Off-the-shelf learning}
 
 \paragraph{How do these results compare to related studies?}
-Of all related work mentioned in section \ref{related_work}, \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}) was the only one that examined VTs' OTS learning properties. It reported best OTS learning performance for the \texttt{Swin} VT, which is much in line with results in table \ref{results:tab:ots}.
+Of all related work mentioned in section \ref{related_work}, \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}) was the only one that examined VTs' OTS learning properties. It reported the best OTS learning performance for the \texttt{Swin} VT, which is much in line with the results in table \ref{results:tab:ots}.
 
-Besides \texttt{Swin}, \citeauthor{zhou2021convnets} also included \texttt{ViT} and \texttt{ResNet101} in its comparisons (among others), and consistently found that \texttt{ResNet101} outperformed \texttt{ViT}. The current study, on the other hand, uses \texttt{ResNet50}, which performs worse than \texttt{ViT} on all tasks except \textit{Artist classification}. Running the same experiments with \texttt{ResNet101} does, however, lead to similar findings as \citeauthor{zhou2021convnets}. On \textit{Type classification}, for example, it achieves a mean testing accuracy of  $86.21\% (\pm 0.70\%)$, which is indeed slightly higher than \texttt{ViT}'s 86.06\% shown in table \ref{results:tab:ots}. Mind that these differences are slight compared to the 89.43\% accuracy achieved by \texttt{Swin} here, so replacing \texttt{ResNet50} by \texttt{ResNet101} would not have affected the overall observations that much.
+Besides \texttt{Swin}, \citeauthor{zhou2021convnets} also included \texttt{ViT} and \texttt{ResNet101} in its comparisons (among others), and consistently found that \texttt{ResNet101} outperformed \texttt{ViT}. The current study, on the other hand, uses \texttt{ResNet50}, which performs worse than \texttt{ViT} on all tasks except \textit{Artist classification}. Running the same experiments with \texttt{ResNet101} does, however, lead to similar findings as \citeauthor{zhou2021convnets}. On \textit{Type classification}, for example, it achieves a mean testing accuracy of  $86.21\% (\pm 0.70\%)$, which is indeed slightly higher than \texttt{ViT}'s 86.06\% shown in table \ref{results:tab:ots}. Mind that these differences are slight compared to the 89.43\% accuracy achieved by \texttt{Swin} here, so replacing \texttt{ResNet50} with \texttt{ResNet101} would not have affected the overall observations that much.
 
 Finally, because \texttt{VGG19} was specifically selected for its good OTS performance in \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), it is interesting that this model is outperformed by \texttt{ResNet50} (which that paper also included) in table \ref{results:tab:ots}. \texttt{VGG19} is the largest model of all, so this discrepancy could be an indication that the smaller datasets used in the current study are too small for \texttt{VGG19}. Additionally, it might also be attributable to the smaller number of classes used here: \texttt{VGG19} has the largest final layer, containing 4096 inputs. While in \citeauthor{sabatelli2018deep} this might have provided the expressive power needed to differentiate between a few hundred classes after just OTS learning, here it likely causes overfitting before good convergence is reached.
 
@@ -139,13 +139,13 @@ Finally, because \texttt{VGG19} was specifically selected for its good OTS perfo
 
 \begin{figure*}[tb]
     \includegraphics[width=\textwidth]{img/layers.png}
-    \caption{Attention layers of successively deeper transformer blocks. One can recognise the input image in earlier layers, while for later ones activation seems sporadic. For \texttt{DeiT}, attention with respect to the class-token is plotted. \texttt{Swin}, on the other hand, does not have a class-token, so average overall attention is used instead. In addition, the window-shifting operations of this architecture are counteracted.}
+    \caption{Attention layers of successively deeper transformer blocks. One can recognize the input image in earlier layers, while for later ones, activation seems sporadic. For \texttt{DeiT}, attention with respect to the class-token is plotted. \texttt{Swin}, on the other hand, does not have a class-token, so average overall attention is used instead. In addition, the window-shifting operations of this architecture are counteracted.}
     \label{results:img:layers}
 \end{figure*}
 
-While results are in line with previous studies, it was still surprising to see that VTs showed such good OTS learning performance in section \ref{results:ots}. It suggests that these transformer based architectures are able to give a very complete, high level encoding of the input image. For CNNs this is commonly thought to be true, as they are often described as hierarchical feature extractors that build successively higher level feature maps from lower level ones (see section \ref{intro:cnns}). If the same is true for VTs, is not well understood at this moment. Or at least to the best of the author's knowledge, that is.
+While results are in line with previous studies, it was still surprising to see that VTs showed such good OTS learning performance in section \ref{results:ots}. It suggests that these transformer-based architectures are able to give a very complete, high-level encoding of the input image. For CNNs this is commonly thought to be true, as they are often described as hierarchical feature extractors that build successively higher-level feature maps from lower-level ones (see section \ref{intro:cnns}). If the same is true for VTs, is not well understood at this moment. Or at least to the best of the author's knowledge, that is.
 
-A hint of an answer can, however, be found when plotting activation of successively deeper attention layers, as is done in figure \ref{results:img:layers}. While earlier layers retain much spatial information, later ones show more sporadic activation patters. This is what one might expect from an hierarchical feature extractor: the random pixels lighting up might, for example, correspond to specific, high level properties of the input. Nevertheless, it should be emphasised that no strong conclusions should be drawn from these images, and that more research with respect to explainability is desired.
+A hint of an answer can, however, be found when plotting activation of successively deeper attention layers, as is done in figure \ref{results:img:layers}. While earlier layers retain much spatial information, later ones show more sporadic activation patterns. This is what one might expect from a hierarchical feature extractor: the random pixels lighting up might, for example, correspond to specific, high-level properties of the input. Nevertheless, it should be emphasized that no strong conclusions should be drawn from these images, and that more research with respect to explainability is desired.
 % Also mention that this was unexpected (but in line with blabla);
 % Feature extractor/hierarchical representation building
 % Layers img.
@@ -156,13 +156,13 @@ A hint of an answer can, however, be found when plotting activation of successiv
 \paragraph{How do these results compare to related studies?}
 That the \texttt{Swin} VT performs well after FT, is again consistent with \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}). In that paper, however, \texttt{ViT} outperforms the \texttt{ResNet101} and \texttt{ResNet152} CNNs. This differs from the results in table \ref{results:tab:ft}, where \texttt{ViT} does not perform well overall, and even shows the worst testing accuracy on \textit{Type classification}, with 90.11\%. \texttt{ResNet50} achieves 91.78\% accuracy here, and testing the same \texttt{ResNet101} and \texttt{ResNet152} versions that \citeauthor{zhou2021convnets} used does not change much, as this leads to 91.96\% ($\pm$ 0.59\%) and 91.94\% ($\pm$ 0.25) accuracy, respectively.
 
-Results are also less favourable for VTs compared to \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}). In that paper the `tiny' version of \texttt{DeiT} outperforms \texttt{ResNet50}, while in table \ref{results:tab:ft} this same \texttt{ResNet50} performs slightly better than the `base' version of \texttt{DeiT}. Going `tiny' also does not help: on \textit{Type classificaiton}, for instance, `tiny' \texttt{DeiT} gets 90.44\% ($\pm$ 0.93\%), which is even worse than `base' \texttt{DeiT}'s 91.78\% in table \ref{results:tab:ots}.
+Results are also less favorable for VTs compared to \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}). In that paper, the `tiny' version of \texttt{DeiT} outperforms \texttt{ResNet50}, while in table \ref{results:tab:ft} this same \texttt{ResNet50} performs slightly better than the `base' version of \texttt{DeiT}. Going `tiny' also does not help: on \textit{Type classification}, for instance, `tiny' \texttt{DeiT} gets 90.44\% ($\pm$ 0.93\%), which is even worse than `base' \texttt{DeiT}'s 91.78\% in table \ref{results:tab:ots}.
 
 These slight performance differences could be attributable to the different datasets used. In that case, it seems, VTs have certain strengths that those other datasets take more advantage of. Alternatively, it could be that hyperparameters and regularisation still leave room for improvement. The reason for thinking this, is that preliminary experiments suggested that VTs benefit more from regularisation than CNNs do.
 
 Finally, it was observed that \texttt{ResNet50} appears to flourish with FT, sometimes even beating \texttt{Conv\-Next} in the rankings. This is consistent with \citeauthor{sabatelli2018deep} (\citeyear{sabatelli2018deep}), where it was the best FT model overall.
 
-\paragraph{Why are results less favourable for VTs after FT than after OTS learning?}
+\paragraph{Why are results less favorable for VTs after FT than after OTS learning?}
 
 \begin{figure*}[tb]
     \centering
@@ -176,7 +176,7 @@ Finally, it was observed that \texttt{ResNet50} appears to flourish with FT, som
     \caption{Dish}
     \label{results:img:sal:dish}
     \end{subfigure}
-    \caption{Saliency maps for \texttt{ConvNext}, \texttt{DeiT} and \texttt{Swin} after both off-the-shelf learning (OTS), and fine-tuning (FT). \texttt{ConvNext} appears to benefit more when training the whole model instead of the last layer, because it shows the biggest differences between OTS learning and FT. In case of image \ref{results:img:sal:dish} this even makes the difference between correct and incorrect classification.}
+    \caption{Saliency maps for \texttt{ConvNext}, \texttt{DeiT}, and \texttt{Swin} after both off-the-shelf learning (OTS), and fine-tuning (FT). \texttt{ConvNext} appears to benefit more when training the whole model instead of the last layer, because it shows the biggest differences between OTS learning and FT. In the case of image \ref{results:img:sal:dish}, this even makes the difference between correct and incorrect classification.}
     \label{results:img:sal}
 \end{figure*}
 
@@ -185,7 +185,7 @@ VTs and CNNs are much closer together after FT in table \ref{results:tab:ft} tha
 Supporting `evidence' might be visible in figure \ref{results:img:sal}. It plots saliency maps for one CNN (\texttt{ConvNext}), and two VTs (\texttt{DeiT} and \texttt{Swin}). It is interesting that \texttt{ConvNext} shows much bigger differences between the OTS and FT plots. In figure \ref{results:img:sal:picture}, for example, it learns to just look at the picture frame after FT. In figure \ref{results:img:sal:dish} it learns to look more at the center, which allows it to correctly classify the input as a dish instead of a plate\footnote{No idea what the difference is between these classes, but these models do seem to know, so that is good!}. % TODO Maybe delete this comment, not very professional
 These bigger differences for \texttt{ConvNext} align well with observations made earlier, as they suggest that there is still much improvement possible after just OTS learning for CNNs.
 
-The images in figure \ref{results:img:sal} are representative examples, and show observation that could have been made from other images too. How representative the 3 models are for all 8 is debatable, and was not tested. In general, a big disclaimer should be added to these results, because some hand waving is involved. Importantly, 3 different salience mapping techniques were used: GradCam \citep{selvaraju2017grad} was implemented for \texttt{ConvNext}, while Attention Rollout \citep{abnar2020quantifying} was implemented for \texttt{DeiT}. This already makes the comparison somewhat unfair, and it becomes even worse when \texttt{Swin} is added, for which a self-invented method was used. This method is similar to GradCam, but instead of multiplying \textit{average} CNN channel gradients with said channel's activation, it directly multiplies activation with corresponding gradients in the output of one of the later transformer blocks\footnote{For the full implementation of all techniques, one is referred to the source code on: \\ \url{https://github.com/IndoorAdventurer/ViTTransferLearningForArtClassification}.}. Despite this, saliency maps were included, as they are interesting nonetheless.
+The images in figure \ref{results:img:sal} are representative examples, and show observations that could have been made from other images too. How representative the 3 models are for all 8 is debatable, and was not tested. In general, a big disclaimer should be added to these results, because some hand waving is involved. Importantly, 3 different salience mapping techniques were used: GradCam \citep{selvaraju2017grad} was implemented for \texttt{ConvNext}, while Attention Rollout \citep{abnar2020quantifying} was implemented for \texttt{DeiT}. This already makes the comparison somewhat unfair, and it becomes even worse when \texttt{Swin} is added, for which a self-invented method was used. This method is similar to GradCam, but instead of multiplying \textit{average} CNN channel gradients with said channel's activation, it directly multiplies activation with corresponding gradients in the output of one of the later transformer blocks\footnote{For the full implementation of all techniques, one is referred to the source code on: \\ \url{https://github.com/IndoorAdventurer/ViTTransferLearningForArtClassification}.}. Despite this, saliency maps were included, as they are interesting nonetheless.
 % Show saliency maps here
 % MENTION TECHNIQUES AND SHORTCOMMINGS!!!
 
@@ -203,7 +203,7 @@ Then there is the problem of balance. It was mentioned earlier that balanced acc
 % This seems counterintuitive, as one would think artist identification is much more challenging than determining if something is a painting, or if it is made out of paper instead of wood. An explanation can likely be found in table \ref{methods:datasets}, which shows that material and artist classification sets are the least and most balanced, respectively. In addition, tables \ref{results:tab:ots_type} through \ref{results:tab:ots_artist} show that balanced accuracies are up to 14\% lower than plain ones for material classification, while they are much closer for artist classification. This suggests much accuracy is lost by misclassifying instances of less occurring classes in favor of more occurring ones. Similar finding can be done for FT results in section \ref{results:ft}.
 
 \paragraph{The same hyperparameters are used for all models. Is this fair?}
-The final learning scheme was chosen after extensive hyperparameter optimization, and was partially inspired by related work. It is possible that doing this for each model individually, would have resulted in \textit{slightly} higher performances. This paper, however, does not aim to get the best possible performance, but instead wants to see how models compare to one another. It is unlikely that individually tuning each model would have changed overall findings.
+The final learning scheme was chosen after extensive hyperparameter optimization, and was partially inspired by related work. It is possible that doing this for each model individually would have resulted in \textit{slightly} higher performances. This paper, however, does not aim to get the best possible performance, but instead wants to see how models compare to one another. It is unlikely that individually tuning each model would have changed overall findings.
 
 A small asterisk to be made here, is that VTs might benefit more from better regularisation than CNNs (see section \ref{exp:int:ft}). Still, final accuracy should not be the only concern, because ease of use (i.e. effort needed to find the right hyperparameters) will also determine to what degree VTs are a valuable alternative to CNNs. Moreover, the main finding of this paper seems to be that VTs are able to perform on par with CNNs. Slightly better performance for VTs would not exactly hurt this finding.
 
@@ -211,10 +211,10 @@ A small asterisk to be made here, is that VTs might benefit more from better reg
 % Not about getting the best overall performance, but seeing how they compare to one another
 % Asterix is that VTs might be able to do better, but then again -> Its also about ease of use
 
-\paragraph{To what extent are the chosen models representative for all VTs and CNNs?}
+\paragraph{To what extent are the chosen models representative of all VTs and CNNs?}
 Most models were selected because of their mention in related work. Notable exceptions are \texttt{ConvNext} and \texttt{EfficientNetV2}, which were selected because they are equally recent as the used VTs. Many of these models are popular/common, but one can't say that they are a representative sample. The question, of course, also is not how VTs and CNNs as a group compare to one another. Instead, the question is if the VT landscape as a whole has something to offer that could be an interesting alternative to common CNNs.
 
-It is also interesting to wonder if, for example, `tiny' or `medium' sized version should have been used instead of `base' versions. All available `tiny' models were tested as well, and results have been reported where appropriate (e.g. section \ref{exp:int:ft}). Overall, however, these results did not suggest that using `tiny' versions would have made much of a difference for the rankings: `tiny' \texttt{Swin} and \texttt{ConvNext}, for example, remained superior under that circumstance.
+It is also interesting to wonder if, for example, `tiny'- or `medium'-sized version should have been used instead of `base' versions. All available `tiny' models were tested as well, and results have been reported where appropriate (e.g. section \ref{exp:int:ft}). Overall, however, these results did not suggest that using `tiny' versions would have made much of a difference for the rankings: `tiny' \texttt{Swin} and \texttt{ConvNext}, for example, remained superior under that circumstance.
 
 \paragraph{What can be concluded from the results presented?}
 
@@ -230,8 +230,8 @@ After OTS learning, results are slightly better for VTs, while after FT, results
 
 Of course, final accuracy is not the full story, since time/accuracy trade-offs, for example, can also determine which model is preferred. Figure \ref{results:img:ots_vs_ft_type} plots the \textit{Type classification} accuracies of tables \ref{results:tab:ots} and \ref{results:tab:ft} against training time per epoch. Total training time was not chosen instead, as this measure depends much more on selected hyperparameters.
 
-The best overall performing model is a fine-tuned VT (\texttt{Swin}). At the same time, it is perhaps a CNN that shows the best time/accuracy trade-offs, because it is able to perform better than any OTS trained model, while still taking less time per epoch than any OTS trained VT. The particular CNN this regards, is \texttt{ResNet50}. Recall that this model only had 25.6 million parameters, while most VTs had around 86 million.
+The best overall performing model is a fine-tuned VT (\texttt{Swin}). At the same time, it is perhaps a CNN that shows the best time/accuracy trade-offs, because it performs better than any OTS-trained model, while still taking less time per epoch than any OTS-trained VT. The particular CNN this concerns, is \texttt{ResNet50}. Recall that this model only had 25.6 million parameters, while most VTs had around 86 million.
 
-All `tiny' VTs are around the same size as \texttt{ResNet50}, and using these would have changed the situation completely. As such, taking figure \ref{results:img:ots_vs_ft_type} with a grain of salt, would be appropriate.
+All `tiny' VTs are around the same size as \texttt{ResNet50}, and using these would have changed the situation completely. As such, taking figure \ref{results:img:ots_vs_ft_type} with a grain of salt would be appropriate.
 
 Still, it seemed fitting to conclude with this figure, as it neatly summarises all the main findings done in this section.
