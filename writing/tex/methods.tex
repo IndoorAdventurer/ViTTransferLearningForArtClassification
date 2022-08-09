@@ -43,7 +43,7 @@ Besides the tasks described above, Table \ref{methods:datasets} shows an experim
 % Dataset described in more detail in Appendix A, including histograms and confusion matrices + balancing 'algorithm'
 
 \subsection{Models} \label{methods:models}
-Eight different neural network architectures are used throughout this paper, of which four are CNN-based and four VT-based. When multiple versions are available (i.e. `base', `small', `tiny'), `base'/`medium' ones are chosen.
+Eight different neural network architectures are used, of which four are CNN-based and four VT-based. When multiple versions are available (i.e. `base', `small', `tiny'), `base'/`medium' ones are chosen.
 
 To start off with CNNs, \texttt{ResNet50} \citep{he2016deep} and \texttt{VGG19} \citep{simonyan2014very} are chosen, as these were the best performing models in \citeauthor{sabatelli2018deep} for respectively FT and OTS learning. In addition, \citeauthor{matsoukas2021time} (\citeyear{matsoukas2021time}) used \texttt{ResNet50} too, while \citeauthor{zhou2021convnets} (\citeyear{zhou2021convnets}) used \texttt{ResNet101} and \texttt{ResNet152}. To also add some more recent CNNs, \texttt{ConvNext} \citep{liu2022convnet} -- a purely CNN-based model inspired by VTs' recent success -- and \texttt{EfficientNetV2} \citep{tan2021efficientnetv2} are included.
 
